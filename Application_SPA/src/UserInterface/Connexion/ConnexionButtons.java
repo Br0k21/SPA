@@ -44,6 +44,4 @@ public class ConnexionButtons extends JPanel {
             }
         }
     }
-
-    // ceci est un test
 }
