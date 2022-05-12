@@ -96,6 +96,12 @@ public class MainWindow extends JFrame {
         // Ajout des listener
         //MenuListener
         owner.addActionListener(menuListener);
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         // Panels
         panelList = Controller.Utils.setMainPanels(this);

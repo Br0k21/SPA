@@ -7,14 +7,14 @@ import java.awt.*;
 
 public class OwnerSearchPanel extends JPanel {
     private MainWindow mainW;
-    private SearchOwner search;
+    private OwnerLabels search;
     private OwnerButton button;
 
     public OwnerSearchPanel(MainWindow mainW) {
         this.mainW = mainW;
         this.setLayout(new GridLayout(8,1));
 
-        search = new SearchOwner();
+        search = new OwnerLabels();
         button = new OwnerButton(this.mainW);
 
         this.add(search);

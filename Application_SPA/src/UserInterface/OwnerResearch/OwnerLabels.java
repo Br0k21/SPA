@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class SearchOwner extends JPanel {
+public class OwnerLabels extends JPanel {
     private ArrayList<String> countries;
 
     private JComboBox<String> country;
     private JLabel countriesL;
 
-    public SearchOwner() {
+    public OwnerLabels() {
         this.setLayout(new FlowLayout());
 
         countries = new ArrayList<>();
