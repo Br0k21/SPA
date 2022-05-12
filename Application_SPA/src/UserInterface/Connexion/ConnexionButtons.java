@@ -3,24 +3,23 @@ package UserInterface.Connexion;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ConnexionButtons extends EntryExitButtons {
+    private ConnexionWindow coW;
 
-    public ConnexionButtons(MainWindow w) {
-        super(w);
+    public ConnexionButtons(ConnexionWindow coW) {
+        super();
+        this.coW = coW;
     }
 
     @Override
     public void valide() {
-
+        MainWindow w = new MainWindow();
+        coW.dispose();
     }
 
     @Override
     public void exit() {
-
+        System.exit(0);
     }
 }

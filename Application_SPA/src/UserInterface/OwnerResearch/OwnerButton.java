@@ -4,9 +4,11 @@ import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
 
 public class OwnerButton extends EntryExitButtons {
+    private MainWindow mainW;
 
     public OwnerButton(MainWindow mainW) {
-        super(mainW);
+        super();
+        this.mainW = mainW;
     }
 
     @Override

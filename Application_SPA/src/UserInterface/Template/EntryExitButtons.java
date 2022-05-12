@@ -8,12 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class EntryExitButtons extends JPanel{
-    protected MainWindow mainW;
     protected JButton valide, exit;
     protected ButtonListener buttonListener;
 
-    private EntryExitButtons(MainWindow mainW, JButton valide, JButton exit) {
-        this.mainW = mainW;
+    private EntryExitButtons(JButton valide, JButton exit) {
         this.valide = valide;
         this.exit = exit;
         this.buttonListener = new ButtonListener();
@@ -26,8 +24,8 @@ public abstract class EntryExitButtons extends JPanel{
         this.add(exit);
     }
 
-    public EntryExitButtons(MainWindow mainW) {
-        this(mainW, new JButton("valider"), new JButton("Retour"));
+    public EntryExitButtons() {
+        this(new JButton("valider"), new JButton("Retour"));
     }
 
     private class ButtonListener implements ActionListener {

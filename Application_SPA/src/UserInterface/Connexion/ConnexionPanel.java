@@ -6,16 +6,16 @@ import java.awt.*;
 public class ConnexionPanel extends JPanel {
     private ConnexionLabels connexionL;
     private ConnexionButtons connexionB;
-    private JFrame mainW;
+    private ConnexionWindow coW;
 
-    public ConnexionPanel(JFrame mainW) {
+    public ConnexionPanel(ConnexionWindow coW) {
         this.setLayout(new BorderLayout());
 
-        this.mainW = mainW;
+        this.coW = coW;
 
         // Initialisation panels
         connexionL = new ConnexionLabels();
-        connexionB = new ConnexionButtons(mainW);
+        connexionB = new ConnexionButtons(coW);
 
         // Ajout dans le panneau
         this.add(connexionL, BorderLayout.CENTER);
