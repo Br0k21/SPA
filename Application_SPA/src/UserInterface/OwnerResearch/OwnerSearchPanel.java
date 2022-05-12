@@ -1,14 +1,15 @@
 package UserInterface.OwnerResearch;
 
 import UserInterface.MainWindow;
+import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class OwnerSearchPanel extends JPanel {
     private MainWindow mainW;
-    private OwnerLabels search;
-    private OwnerButton button;
+    private JPanel search;
+    private EntryExitButtons button;
 
     public OwnerSearchPanel(MainWindow mainW) {
         this.mainW = mainW;
@@ -19,9 +20,5 @@ public class OwnerSearchPanel extends JPanel {
 
         this.add(search);
         this.add(button);
-    }
-
-    public void ownerResearch() {
-        System.out.println("Pays choisis : "+search.getCountry());
     }
 }
