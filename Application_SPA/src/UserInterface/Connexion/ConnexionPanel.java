@@ -11,7 +11,7 @@ public class ConnexionPanel extends JPanel {
     private ConnexionWindow coW;
 
     public ConnexionPanel(ConnexionWindow coW) {
-        this.setLayout(new BorderLayout());
+        this.setLayout(new FlowLayout());
 
         this.coW = coW;
 
@@ -20,8 +20,8 @@ public class ConnexionPanel extends JPanel {
         connexionB = new ConnexionButtons(coW);
 
         // Ajout dans le panneau
-        this.add(connexionL, BorderLayout.CENTER);
-        this.add(connexionB, BorderLayout.SOUTH);
+        this.add(connexionL);
+        this.add(connexionB);
 
         this.setVisible(true);
     }

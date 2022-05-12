@@ -2,10 +2,11 @@ package UserInterface.Connexion;
 
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
+import UserInterface.Template.Wnds;
 
 
 public class ConnexionButtons extends EntryExitButtons {
-    private ConnexionWindow coW;
+    private Wnds coW;
 
     public ConnexionButtons(ConnexionWindow coW) {
         super();

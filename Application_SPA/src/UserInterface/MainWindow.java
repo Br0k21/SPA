@@ -4,7 +4,7 @@ import Model.*;
 
 import Controller.ThreadHeure;
 import UserInterface.MainPanel.HeurePanel;
-import UserInterface.OwnerResearch.OwnerSearchPanel;
+import UserInterface.Template.Wnds;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +12,8 @@ import java.awt.event.*;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-public class MainWindow extends JFrame {
-    private Container mainC;
-    private JPanel currentPanel;
-    private Map<String,JPanel> panelList;
+public class MainWindow extends Wnds {
+    private JPanel currentPanel; // peut etre retirer
 
     private ThreadHeure heure;
 
@@ -27,13 +25,23 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         super("S.P.A.");
-        this.setBounds(400,50,800,500);
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
+
+        setJMenuBar();
+        setListener();
+        setMain();
+        setTime();
+
+        this.setVisible(true);
+    }
+
+// Listener
+    private class MenuListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == owner) {
+                changeCenterPanel(getPanelList().get(Constant.OWNER));
             }
-        });
+            if(e.getSource() == treatmentForm){
 
         // Panels
         panelList = Controller.Utils.setMainPanels(this);
@@ -70,23 +78,31 @@ public class MainWindow extends JFrame {
 
 // Fonctions
     public void updateTime() {
-        mainC.remove(panelList.get(Constant.TIME));
-        panelList.remove(Constant.TIME);
-        panelList.put(Constant.TIME, new HeurePanel(new GregorianCalendar()));
-        mainC.add(panelList.get(Constant.TIME),BorderLayout.SOUTH);
-        mainC.validate();
+        getContainer().remove(getPanelList().get(Constant.TIME));
+        getPanelList().remove(Constant.TIME);
+        getPanelList().put(Constant.TIME, new HeurePanel(new GregorianCalendar()));
+        getContainer().add(getPanelList().get(Constant.TIME),BorderLayout.SOUTH);
+        getContainer().validate();
     }
 
     public void changeCenterPanel(JPanel newPanel) {
-        mainC.removeAll();
-        mainC.add(newPanel, BorderLayout.CENTER);
-        mainC.add(panelList.get(Constant.TIME), BorderLayout.SOUTH);
-        mainC.validate();
+        getContainer().removeAll();
+        getContainer().add(newPanel, BorderLayout.CENTER);
+        getContainer().add(getPanelList().get(Constant.TIME), BorderLayout.SOUTH);
+        getContainer().validate();
         SwingUtilities.updateComponentTreeUI(this);
     }
 
     public void changeCenterPanel() {
-        changeCenterPanel(panelList.get(Constant.MAIN));
+        changeCenterPanel(getPanelList().get(Constant.MAIN));
+    }
+
+    private void setMain() {
+        // Init Panels
+        setPanelList(Controller.Utils.setMainPanels(this));
+        // Ajout du panneaux principal
+        getContainer().add(getPanelList().get(Constant.MAIN), BorderLayout.CENTER);
+        currentPanel = getPanelList().get(Constant.MAIN);
     }
 
     private void setJMenuBar() {
@@ -137,17 +153,9 @@ public class MainWindow extends JFrame {
         menuBar.add(info);
     }
 
-    private void setTimeThread() {
-        // Thread heure
-        heure = new ThreadHeure(this);
-        mainC.add(panelList.get(Constant.TIME),BorderLayout.SOUTH);
-        heure.start();
-    }
-
     private void setListener() {
         //Init Listener
         menuListener = new MenuListener();
-
         // Ajout des listener
         //MenuListener
         owner.addActionListener(menuListener);
@@ -159,15 +167,15 @@ public class MainWindow extends JFrame {
         });
     }
 
-    private void setContainer() {
-        // Conteneur
-        mainC = new Container();
-        mainC = this.getContentPane();
-        mainC.setLayout(new BorderLayout());
+    private void setTime() {
+        // Thread heure
+        heure = new ThreadHeure(this);
+        getContainer().add(getPanelList().get(Constant.TIME),BorderLayout.SOUTH);
+        heure.start();
     }
 
 // Getters & setters
     public Map<String, JPanel> getPanelList() {
-        return panelList;
+        return super.getPanelList();
     }
 }

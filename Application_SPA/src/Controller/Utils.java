@@ -20,6 +20,7 @@ public class Utils {
         return panels;
     }
 
+    // A refaire selon Singleton et passage par couche acce
     public static void setCountries(ArrayList<String> countries) {
         CountryDBAcces countryDBAcces = new CountryDBAcces();
 
