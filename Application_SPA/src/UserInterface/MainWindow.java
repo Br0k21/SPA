@@ -34,38 +34,12 @@ public class MainWindow extends Wnds {
         this.setVisible(true);
     }
 
-// Listener
+    // Listener
     private class MenuListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == owner) {
                 changeCenterPanel(getPanelList().get(Constant.OWNER));
-            }
-            if(e.getSource() == treatmentForm){
-
-        // Panels
-        panelList = Controller.Utils.setMainPanels(this);
-
-        setContainer();
-
-        setTimeThread();
-
-        setJMenuBar();
-
-        setListener();
-
-        mainC.add(panelList.get(Constant.MAIN), BorderLayout.CENTER);
-        currentPanel = panelList.get(Constant.MAIN);
-
-        this.setVisible(true);
-    }
-
-// Listener
-    private class MenuListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == owner) {
-                changeCenterPanel(panelList.get(Constant.OWNER));
             }
             if(e.getSource() == treatmentForm){
 
@@ -75,9 +49,9 @@ public class MainWindow extends Wnds {
             }
         }
     }
-    
 
-// Fonctions
+
+    // Fonctions
     public void updateTime() {
         getContainer().remove(getPanelList().get(Constant.TIME));
         getPanelList().remove(Constant.TIME);
@@ -175,7 +149,7 @@ public class MainWindow extends Wnds {
         heure.start();
     }
 
-// Getters & setters
+    // Getters & setters
     public Map<String, JPanel> getPanelList() {
         return super.getPanelList();
     }
