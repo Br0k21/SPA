@@ -1,7 +1,5 @@
 package UserInterface.OwnerResearch;
 
-import Controller.Utils;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ public class SearchOwner extends JPanel {
         this.setLayout(new FlowLayout());
 
         countries = new ArrayList<>();
-        Utils.setCountries(countries);
+        Controller.Utils.setCountries(countries);
 
         country = new JComboBox<>();
         for(String s: countries) {

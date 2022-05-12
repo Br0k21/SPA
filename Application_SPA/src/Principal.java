@@ -1,5 +1,3 @@
-package UserInterface;
-
 import UserInterface.Connexion.ConnexionWindow;
 
 public class Principal {

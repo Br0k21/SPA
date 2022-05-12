@@ -1,7 +1,8 @@
 package UserInterface;
 
+import Model.*;
+
 import Controller.ThreadHeure;
-import Controller.Utils;
 import UserInterface.MainPanel.HeurePanel;
 import UserInterface.OwnerResearch.OwnerSearchPanel;
 
@@ -97,12 +98,12 @@ public class MainWindow extends JFrame {
         owner.addActionListener(menuListener);
 
         // Panels
-        panelList = Utils.setMainPanels(this);
+        panelList = Controller.Utils.setMainPanels(this);
 
 
-        mainC.add(panelList.get("principale"), BorderLayout.CENTER);
-        currentPanel = panelList.get("principale");
-        mainC.add(panelList.get("heure"),BorderLayout.SOUTH);
+        mainC.add(panelList.get(Constant.MAIN), BorderLayout.CENTER);
+        currentPanel = panelList.get(Constant.MAIN);
+        mainC.add(panelList.get(Constant.MAIN),BorderLayout.SOUTH);
         heure.start();
 
         this.setVisible(true);
@@ -113,7 +114,7 @@ public class MainWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == owner) {
-                changeCenterPanel(new OwnerSearchPanel(MainWindow.this));
+                changeCenterPanel(panelList.get(Constant.OWNER));
             }
             if(e.getSource() == treatmentForm){
 
@@ -126,23 +127,23 @@ public class MainWindow extends JFrame {
 
 // Fonctions
     public void updateTime() {
-        mainC.remove(panelList.get("heure"));
-        panelList.remove("heure");
-        panelList.put("heure", new HeurePanel(new GregorianCalendar()));
-        mainC.add(panelList.get("heure"),BorderLayout.SOUTH);
+        mainC.remove(panelList.get(Constant.TIME));
+        panelList.remove(Constant.TIME);
+        panelList.put(Constant.TIME, new HeurePanel(new GregorianCalendar()));
+        mainC.add(panelList.get(Constant.TIME),BorderLayout.SOUTH);
         mainC.validate();
     }
 
     public void changeCenterPanel(JPanel newPanel) {
         mainC.removeAll();
         mainC.add(newPanel, BorderLayout.CENTER);
-        mainC.add(panelList.get("heure"), BorderLayout.SOUTH);
+        mainC.add(panelList.get(Constant.TIME), BorderLayout.SOUTH);
         mainC.validate();
         SwingUtilities.updateComponentTreeUI(this);
     }
 
     public void changeCenterPanel() {
-        changeCenterPanel(panelList.get("principale"));
+        changeCenterPanel(panelList.get(Constant.MAIN));
     }
 
 // Getters & setters
