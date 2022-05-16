@@ -44,7 +44,7 @@ public abstract class Wnds extends JFrame {
         this.panelList = panelList;
     }
 
-    public void setPanel(String key, JPanel value){
+    public void addPanel(String key, JPanel value){
         panelList.put(key,value);
     }
 

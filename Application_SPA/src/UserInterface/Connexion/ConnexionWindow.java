@@ -11,7 +11,7 @@ public class ConnexionWindow extends Wnds {
         super("Connexion", 500, 100, 250,150);
 
 
-        setPanel(Constant.CO,new ConnexionPanel(this));
+        addPanel(Constant.CO,new ConnexionPanel(this));
 
         getContainer().add(getPanel(Constant.CO));
 
