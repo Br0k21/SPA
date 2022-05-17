@@ -6,8 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConnexionPanel extends JPanel {
-    private JPanel connexionL;
-    private EntryExitButtons connexionB;
+    private ConnexionLabels connexionL;
+    private ConnexionButtons connexionB;
     private ConnexionWindow coW;
 
     public ConnexionPanel(ConnexionWindow coW) {

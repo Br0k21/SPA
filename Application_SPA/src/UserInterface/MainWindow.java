@@ -4,12 +4,16 @@ import Model.*;
 
 import Controller.ThreadHeure;
 import UserInterface.MainPanel.HeurePanel;
+import UserInterface.MainPanel.MainPanel;
+import UserInterface.OwnerResearch.OwnerSearchPanel;
 import UserInterface.Template.Wnds;
+import UserInterface.TreatmentForm.TreatmentPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainWindow extends Wnds {
@@ -35,7 +39,7 @@ public class MainWindow extends Wnds {
     }
 
     // Listener
-    private class MenuListener implements ActionListener {
+    private class MenuListener implements ActionListener     {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == owner) {
@@ -74,7 +78,7 @@ public class MainWindow extends Wnds {
 
     private void setMain() {
         // Init Panels
-        setPanelList(Controller.Utils.setMainPanels(this));
+        setPanelList(initMainPanels(this));
         // Ajout du panneaux principal
         getContainer().add(getPanelList().get(Constant.MAIN), BorderLayout.CENTER);
         currentPanel = getPanelList().get(Constant.MAIN);
@@ -152,5 +156,17 @@ public class MainWindow extends Wnds {
     // Getters & setters
     public Map<String, JPanel> getPanelList() {
         return super.getPanelList();
+    }
+
+    public  Map<String, JPanel> initMainPanels(MainWindow window) {
+        Map<String, JPanel> panels = new HashMap<>();
+
+        // Ajout des panneaux
+        panels.put("main", new MainPanel());
+        panels.put("time", new HeurePanel(new GregorianCalendar()));
+        panels.put("owner", new OwnerSearchPanel(window));
+        panels.put("treatmentForm", new TreatmentPanel(window));
+
+        return panels;
     }
 }

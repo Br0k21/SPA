@@ -7,14 +7,17 @@ import java.util.ArrayList;
 public class OwnerLabels extends JPanel {
     private ArrayList<String> countries;
 
+    private Controller.Utils utils;
+
     private JComboBox<String> country;
     private JLabel countriesL;
 
     public OwnerLabels() {
         this.setLayout(new FlowLayout());
+        utils = new Controller.Utils();
 
         countries = new ArrayList<>();
-        Controller.Utils.setCountries(countries);
+        utils.getCountries(countries);
 
         country = new JComboBox<>();
         for(String s: countries) {

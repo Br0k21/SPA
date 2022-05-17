@@ -1,31 +1,38 @@
 package Controller;
 
-import DataAccess.CountryDBAcces;
-import UserInterface.*;
-import UserInterface.MainPanel.*;
-import UserInterface.OwnerResearch.OwnerSearchPanel;
+import Business.*;
+import Model.*;
 
-import javax.swing.*;
 import java.util.*;
 
 public class Utils {
-    public static Map<String, JPanel> setMainPanels(MainWindow window) {
-        Map<String, JPanel> panels = new HashMap<>();
 
-        // Ajout des panneaux
-        panels.put("main", new MainPanel());
-        panels.put("time", new HeurePanel(new GregorianCalendar()));
-        panels.put("owner", new OwnerSearchPanel(window));
-
-        return panels;
+    public void getCountries(ArrayList<String> countries) {
+        CountryManager country = new CountryManager();
+        country.getCountries(countries);
     }
 
-    // A refaire selon Singleton et passage par couche data acces
-    public static void setCountries(ArrayList<String> countries) {
-        CountryDBAcces countryDBAcces = new CountryDBAcces();
+    public ArrayList<Person> getOwnersFrom(String country) {
+        ArrayList<Person> owners = new ArrayList<>();
+        ArrayList<Person> persons = getPersonsFrom(country);
+        for(Person person : persons) {
+            InCharge inCharge = getInCharge(person.getNationalRegisterNum());
+            if(inCharge.getAnimalID() != null) owners.add(person);
+        }
 
-        countryDBAcces.getAllCountries(countries);
+        return owners;
+    }
 
-        //for (String country: countries) { System.out.println("Je test les countries " +country);}
+
+    public ArrayList<Person> getPersonsFrom(String country) {
+        return new PersonManager().getPersonsFrom( country);
+    }
+
+    public InCharge getInCharge(String personID) {
+        return new InChargeManager().getInCharge(personID);
+    }
+
+    public Animal getAnimal(Integer animalID){
+        return new AnimalManager().getAnimal(animalID);
     }
 }

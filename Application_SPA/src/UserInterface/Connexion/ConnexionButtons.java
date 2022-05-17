@@ -6,21 +6,20 @@ import UserInterface.Template.Wnds;
 
 
 public class ConnexionButtons extends EntryExitButtons {
-    private Wnds coW;
+    private ConnexionWindow coW;
 
     public ConnexionButtons(ConnexionWindow coW) {
-        super();
         this.coW = coW;
     }
 
     @Override
-    public void valide() {
+    public void validate() {
         MainWindow w = new MainWindow();
         coW.dispose();
     }
 
     @Override
-    public void exit() {
+    public void out() {
         System.exit(0);
     }
 }

@@ -4,21 +4,20 @@ import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
 
 public class OwnerButton extends EntryExitButtons {
-    private MainWindow mainW;
+    private OwnerSearchPanel parent;
 
-    public OwnerButton(MainWindow mainW) {
-        super();
-        this.mainW = mainW;
+    public OwnerButton(OwnerSearchPanel parent) {
+        this.parent = parent;
     }
 
     @Override
-    public void valide() {
-        // Afficher les propriétaires en question
-        System.out.println("Afficher les proprietaires.");
+    public void validate() {
+        parent.setCountry();
+        parent.getMainW().changeCenterPanel(new OwnerByCountry(parent.getCountry()));
     }
 
     @Override
-    public void exit() {
-        mainW.changeCenterPanel();
+    public void out() {
+        parent.getMainW().changeCenterPanel();
     }
 }
