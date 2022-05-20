@@ -14,7 +14,9 @@ public class Utils {
 
     public ArrayList<Person> getOwnersFrom(String country) {
         ArrayList<Person> owners = new ArrayList<>();
+        // Récupère toutes les personnes présentes en BD
         ArrayList<Person> persons = getPersonsFrom(country);
+        // Sélectionne uniquement ceux qui ont un lien in_charge
         for(Person person : persons) {
             InCharge inCharge = getInCharge(person.getNationalRegisterNum());
             if(inCharge.getAnimalID() != null) owners.add(person);

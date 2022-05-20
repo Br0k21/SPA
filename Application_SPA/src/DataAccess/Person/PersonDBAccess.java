@@ -35,10 +35,8 @@ public class PersonDBAccess implements IPersonAccess{
             ResultSet data = statement.executeQuery();
 
             while(data.next()) {
-                if(data.getString("country").equals(country)){
+                if(data.getString("country").equals(country))
                     persons.add(implementPerson(data));
-                    System.out.println(data.getString("country")+" "+ country);
-                }
             }
         } catch (SQLException SQLe) {
             System.out.println("Récupération des personnes venant de " + country + " impossible");
@@ -59,7 +57,7 @@ public class PersonDBAccess implements IPersonAccess{
             pers.setPostalCode(data.getString("pers_postal_code"));
             pers.setCity(data.getString("pers_city"));
         }catch(SQLException SQLe) {
-            System.out.println("Probleme lors du garnissage de la personne" );
+            System.out.println("Probleme lors de la récupération de la personne" );
         }
 
         return pers;

@@ -37,10 +37,6 @@ public class OwnerByCountry extends JPanel {
 
         // Ajouter une exception
         if(!owners.isEmpty()) {
-            System.out.println("L'array list owner n'est pas vide");
-
-            for(Person owner : owners) System.out.println(owner.getNationalRegisterNum());
-
             completeArrays();
             this.setLayout(new BorderLayout());
             this.add(countryL, BorderLayout.NORTH);
@@ -48,7 +44,7 @@ public class OwnerByCountry extends JPanel {
             this.add(generateLegende(), BorderLayout.NORTH);
             this.add(generateCenterPanel(), BorderLayout.CENTER);
 
-            } else {System.out.println("c vide");}
+            }
 
     }
 

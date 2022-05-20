@@ -2,7 +2,6 @@ package DataAccess.Animal;
 
 import DataAccess.SingletonConnexion;
 import Model.Animal;
-import Model.InCharge;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
