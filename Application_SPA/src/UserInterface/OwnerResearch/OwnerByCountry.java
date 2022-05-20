@@ -2,10 +2,12 @@ package UserInterface.OwnerResearch;
 
 import Model.*;
 import Controller.*;
-import UserInterface.BlanckPanel;
+import UserInterface.MainWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class OwnerByCountry extends JPanel {
@@ -13,10 +15,13 @@ public class OwnerByCountry extends JPanel {
     private ArrayList<Person> owners;
     private ArrayList<Animal> animals;
     private ArrayList<InCharge> inCharges;
+    private MainWindow mainW;
+    private JButton backButton;
 
     private Utils utils;
 
-    public OwnerByCountry(String country) {
+    public OwnerByCountry(String country, MainWindow mainW) {
+        this.mainW = mainW;
         utils = new Utils();
         countryL = new JLabel(country);
         firstName = new JLabel("Prénom");
@@ -29,23 +34,25 @@ public class OwnerByCountry extends JPanel {
         startDate = new JLabel("Date adoption");
         name = new JLabel("Animal name");
 
-        System.out.println(country);
+        backButton = new JButton("Retour");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainW.changeCenterPanel(mainW.getPanel(Constant.OWNER));
+            }
+        });
+
         owners = utils.getOwnersFrom(country);
         animals = new ArrayList<>();
         inCharges = new ArrayList<>();
 
+        completeArrays();
+        this.setLayout(new BorderLayout());
+        this.add(countryL, BorderLayout.NORTH);
 
-        // Ajouter une exception
-        if(!owners.isEmpty()) {
-            completeArrays();
-            this.setLayout(new BorderLayout());
-            this.add(countryL, BorderLayout.NORTH);
-
-            this.add(generateLegende(), BorderLayout.NORTH);
-            this.add(generateCenterPanel(), BorderLayout.CENTER);
-
-            }
-
+        this.add(generateLegende(), BorderLayout.NORTH);
+        this.add(generateCenterPanel(), BorderLayout.CENTER);
+        this.add(backButton, BorderLayout.SOUTH);
     }
 
     private void completeArrays() {

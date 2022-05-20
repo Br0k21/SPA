@@ -12,7 +12,7 @@ public class TreatmentButtons extends EntryExitButtons {
 
     @Override
     public void validate() {
-
+        System.out.println("Reçu");
     }
 
     @Override

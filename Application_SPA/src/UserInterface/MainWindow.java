@@ -46,7 +46,7 @@ public class MainWindow extends Wnds {
                 changeCenterPanel(getPanelList().get(Constant.OWNER));
             }
             if(e.getSource() == treatmentForm){
-
+                changeCenterPanel(getPanelList().get(Constant.TF));
             }
             if (e.getSource() == species) {
 
@@ -137,7 +137,10 @@ public class MainWindow extends Wnds {
         menuListener = new MenuListener();
         // Ajout des listener
         //MenuListener
+        // Recherche
         owner.addActionListener(menuListener);
+        treatmentForm.addActionListener(menuListener);
+        // Application
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

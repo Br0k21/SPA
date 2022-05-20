@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class ConnexionPanel extends JPanel {
     private ConnexionLabels connexionL;
-    private ConnexionButtons connexionB;
+    private EntryExitButtons connexionB;
     private ConnexionWindow coW;
 
     public ConnexionPanel(ConnexionWindow coW) {

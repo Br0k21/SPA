@@ -13,7 +13,7 @@ public class OwnerButton extends EntryExitButtons {
     @Override
     public void validate() {
         parent.setCountry();
-        parent.getMainW().changeCenterPanel(new OwnerByCountry(parent.getCountry()));
+        parent.getMainW().changeCenterPanel(new OwnerByCountry(parent.getCountry(), parent.getMainW()));
     }
 
     @Override

@@ -1,13 +1,14 @@
 package UserInterface.TreatmentForm;
 
 import UserInterface.MainWindow;
+import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TreatmentPanel extends JPanel {
     private TreatmentLabels treatmentL;
-    private TreatmentButtons treatmentB;
+    private EntryExitButtons treatmentB;
     private MainWindow mainW;
 
     public TreatmentPanel(MainWindow mainW) {
@@ -19,6 +20,5 @@ public class TreatmentPanel extends JPanel {
 
         this.add(treatmentL);
         this.add(treatmentB);
-
     }
 }
