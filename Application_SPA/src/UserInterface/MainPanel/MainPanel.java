@@ -1,17 +1,22 @@
 package UserInterface.MainPanel;
 
+import UserInterface.MainWindow;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
+    private MainWindow mainW;
+
     private CRUDPanel crudP;
     private JLabel welcomeMsg;
 
-    public MainPanel() {
+    public MainPanel(MainWindow mainW) {
+        this.mainW = mainW;
         this.setLayout(new GridLayout(8,1));
 
         // Init panels
-        crudP = new CRUDPanel();
+        crudP = new CRUDPanel(mainW);
         welcomeMsg = new JLabel("Bonjour XXX.");
 
         // Ajout panels

@@ -33,7 +33,7 @@ public abstract class Wnds extends JFrame {
     }
 
     public Wnds(String title){
-        this(title, 400, 50, 800, 500);
+        this(title, 400, 20, 800, 800);
     }
 
     public Map<String, JPanel> getPanelList() {

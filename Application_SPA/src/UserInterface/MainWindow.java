@@ -165,7 +165,7 @@ public class MainWindow extends Wnds {
         Map<String, JPanel> panels = new HashMap<>();
 
         // Ajout des panneaux
-        panels.put("main", new MainPanel());
+        panels.put("main", new MainPanel(window));
         panels.put("time", new HeurePanel(new GregorianCalendar()));
         panels.put("owner", new OwnerSearchPanel(window));
         panels.put("treatmentForm", new TreatmentPanel(window));
