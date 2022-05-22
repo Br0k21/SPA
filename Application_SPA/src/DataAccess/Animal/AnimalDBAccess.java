@@ -32,4 +32,28 @@ public class AnimalDBAccess implements IAnimalAccess{
         }
         return animal;
     }
+
+    @Override
+    public int getFreeID() {
+        Animal animal = new Animal();
+        int highestID = 0;
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connection.prepareStatement("select * from spa.animal");
+            ResultSet data = statement.executeQuery();
+
+            while (data.next()) {
+                if(data.getInt("animal_id") > highestID){
+                    highestID = data.getInt("animal_id");
+                }
+            }
+            connection.close();
+
+        } catch (SQLException SQLe) {
+            System.out.println("Impossible de récupérer le nouvgel ID animal ");
+        }
+
+        return highestID++;
+    }
 }

@@ -8,15 +8,15 @@ import java.util.Date;
 public class Animal {
     private Integer animalID, cellnum, raceID;
     private Date arrivedDate, birthDate, chipPlacementDate, tatooPlacementDate, euthanasiaDate;
-    private String chipNum, chipLocalisation, tatooNum, hairOrSkin, euthanasiaReason, name, receptionID, veterinaryID, sex;
+    private String chipNum, chipLocalisation, tatooNum, euthanasiaReason, name, receptionID, veterinaryID;
     private Double weight;
-    private Boolean toIsolate, sterilised;
+    private Boolean toIsolate, sterilised, sex, hairOrSkin;
 
 
     public Animal() {}
 
     // Constructeur avec info min pour l'arrivée d'un animal
-    public Animal(String sex, String hairOrSkin, Boolean toIsolate, Integer cellnum, Integer raceID, String receptionID, String veterinaryID){
+    public Animal(Boolean sex, Boolean hairOrSkin, Boolean toIsolate, Integer cellnum, Integer raceID, String receptionID, String veterinaryID){
         setNewAnimalId();
         this.arrivedDate = new Date();
         setSex(sex);
@@ -73,7 +73,7 @@ public class Animal {
         this.euthanasiaReason = euthanasiaReason;
     }
 
-    public void setHairOrSkin(String hairOrSkin) {
+    public void setHairOrSkin(Boolean hairOrSkin) {
         this.hairOrSkin = hairOrSkin;
     }
 
@@ -89,7 +89,7 @@ public class Animal {
         this.receptionID = receptionID;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
@@ -169,7 +169,7 @@ public class Animal {
         return weight;
     }
 
-    public String getHairOrSkin() {
+    public Boolean getHairOrSkin() {
         return hairOrSkin;
     }
 
@@ -181,7 +181,7 @@ public class Animal {
         return receptionID;
     }
 
-    public String getSex() {
+    public Boolean getSex() {
         return sex;
     }
 

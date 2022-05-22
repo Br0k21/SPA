@@ -1,13 +1,21 @@
 package UserInterface.Template;
 
+import Controller.Utils;
+import Model.Animal;
+import Model.Exceptions.IncompletFieldException;
 import UserInterface.MainWindow;
-import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+import static java.lang.Integer.*;
+import static java.lang.Double.*;
+
 
 public class Crud extends JPanel {
     private MainWindow mainW;
@@ -100,6 +108,9 @@ public class Crud extends JPanel {
 
         this.add(name);
         this.add(nameField);
+
+        this.add(cellnum);
+        this.add(cellnumField);
 
         this.add(raceID);
         this.add(raceIDField);
@@ -196,11 +207,66 @@ public class Crud extends JPanel {
         setAllEnable(false);
     }
 
+    public Animal getNewAnimal() throws IncompletFieldException{
+        Animal animal = new Animal();
+
+        // Champ obligatoire
+        if(mandatoryFieldMissing())
+            throw new IncompletFieldException();
+        else {
+            animal.setAnimalID(parseInt(animalIDField.getText()));
+            animal.setRaceID(parseInt(raceIDField.getText()));
+            animal.setArrivedDate(Date.valueOf(arrivedDateField.getText()));
+            animal.setReceptionID(receptionIDField.getText());
+            animal.setVeterinaryID(veterinaryIDField.getText());
+        }
+        animal.setToIsolate(toIsolateCB.isSelected());
+        animal.setSterilised(sterilisedCB.isSelected());
+        animal.setSex(male.isSelected());
+        animal.setHairOrSkin(hair.isSelected());
+
+        // Champ non obligatoire
+        animal.setWeight(weightField.getText().equals("") ? null : parseDouble(weightField.getText()));
+        animal.setBirthDate(birthDateField.getText().equals("") ? null : Date.valueOf(birthDateField.getText()));
+        animal.setChipNum(chipNumField.getText().equals("") ? null : chipNumField.getText());
+        animal.setChipLocalisation(chipLocalisationField.getText().equals("")? null : chipLocalisationField.getText());
+        animal.setChipPlacementDate(chipPlacementDateField.getText().equals("") ? null : Date.valueOf(chipPlacementDateField.getText()));
+        animal.setTatooNum(tatooNumField.getText().equals("") ? null : tatooNumField.getText());
+        animal.setTatooPlacementDate(tatooPlacementDateField.getText().equals("") ?  null : Date.valueOf(tatooPlacementDateField.getText()));
+        animal.setEuthanasiaReason(euthanasiaReasonField.getText().equals("") ? null : euthanasiaReasonField.getText());
+        animal.setEuthanasiaDate(euthanasiaDateField.getText().equals("") ? null : Date.valueOf(euthanasiaDateField.getText()));
+
+        return animal;
+    }
+
     private class CheckBoxListener implements ItemListener {
         @Override
         public void itemStateChanged(ItemEvent e) {
             toIsolate = toIsolateCB.isSelected() ? "true" : "false";
             sterilised = sterilisedCB.isSelected()? "true" : "false";
         }
+    }
+
+    public void setAnimalIDField(Integer animalID) {
+        this.animalIDField.setText(animalID.toString());
+    }
+
+    public void setArrivedDateField(GregorianCalendar date) {
+        this.arrivedDateField.setText(date.getTime().toString());
+    }
+
+    private boolean mandatoryFieldMissing() {
+        if(animalIDField.getText().equals(""))
+            return true;
+        if(raceIDField.getText().equals(""))
+            return true;
+        if(arrivedDateField.getText().equals(""))
+            return true;
+        if(receptionIDField.getText().equals(""))
+            return true;
+        if(veterinaryIDField.getText().equals(""))
+            return true;
+
+        return false;
     }
 }

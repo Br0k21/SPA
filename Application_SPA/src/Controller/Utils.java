@@ -37,4 +37,6 @@ public class Utils {
     public Animal getAnimal(Integer animalID){
         return new AnimalManager().getAnimal(animalID);
     }
+
+    public Integer getFreeID(){ return new AnimalManager().getFreeID();}
 }

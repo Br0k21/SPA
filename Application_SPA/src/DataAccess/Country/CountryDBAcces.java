@@ -18,6 +18,8 @@ public class CountryDBAcces implements ICountryAccess{
 
                 countries.add(data.getString("country_name"));
             }
+
+            connection.close();
         } catch (SQLException SQLe) {
             System.out.println("Récupération des pays impossible");
         }
