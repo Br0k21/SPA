@@ -1,7 +1,9 @@
 package UserInterface.CRUD;
 
+import Controller.Utils;
 import Model.Animal;
 import Model.Exceptions.IncompletFieldException;
+import Model.Race;
 import UserInterface.MainWindow;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import static java.lang.Double.parseDouble;
@@ -22,8 +25,9 @@ public class Formulaire extends JPanel {
     private JRadioButton male, female, hair, skin;
     private JCheckBox toIsolateCB, sterilisedCB;
     private String toIsolate, sterilised;
-    private JTextField animalIDField, cellnumField, raceIDField, arrivedDateField, birthDateField, chipPlacementDateField, tatooPlacementDateField, euthanasiaDateField, chipNumField, chipLocalisationField, tatooNumField, euthanasiaReasonField, nameField, receptionIDField, veterinaryIDField, sexField, weightField;
+    private JTextField animalIDField, cellnumField, arrivedDateField, birthDateField, chipPlacementDateField, tatooPlacementDateField, euthanasiaDateField, chipNumField, chipLocalisationField, tatooNumField, euthanasiaReasonField, nameField, receptionIDField, veterinaryIDField, sexField, weightField;
     private CheckBoxListener CBlistenner;
+    private JComboBox<String> raceIDField;
 
     public Formulaire() {
         this.setLayout(new GridLayout(19, 2, 5, 5));
@@ -63,7 +67,7 @@ public class Formulaire extends JPanel {
         animalIDField = new JTextField(); // Ajouter automtiquement un nouveau matricule libre
         animalIDField.setEnabled(false);
         cellnumField = new JTextField();
-        raceIDField = new JTextField(); // Faire un JSpinner avec les races présente ?
+        raceIDField = new JComboBox<>();
         arrivedDateField = new JTextField();
         arrivedDateField.setEnabled(false);
         birthDateField = new JTextField();
@@ -158,6 +162,10 @@ public class Formulaire extends JPanel {
 
     }
 
+    public JTextField getAnimalIDField() {
+        return animalIDField;
+    }
+
     public void setAllEnable(boolean b) {
         nameField.setEnabled(b);
 
@@ -212,10 +220,13 @@ public class Formulaire extends JPanel {
             throw new IncompletFieldException();
         else {
             animal.setAnimalID(parseInt(animalIDField.getText()));
-            animal.setRaceID(parseInt(raceIDField.getText()));
+            animal.setRaceID(raceIDField.getSelectedIndex() + 1);
+            System.out.println(raceIDField.getSelectedIndex() + 1);
+            animal.setCellnum(parseInt(cellnumField.getText()));
             animal.setArrivedDate(Date.valueOf(arrivedDateField.getText()));
             animal.setReceptionID(receptionIDField.getText());
             animal.setVeterinaryID(veterinaryIDField.getText());
+            animal.setName(nameField.getText());
         }
         animal.setToIsolate(toIsolateCB.isSelected());
         animal.setSterilised(sterilisedCB.isSelected());
@@ -223,7 +234,7 @@ public class Formulaire extends JPanel {
         animal.setHairOrSkin(hair.isSelected());
 
         // Champ non obligatoire
-        animal.setWeight(weightField.getText().equals("") ? null : parseDouble(weightField.getText()));
+        animal.setWeight(weightField.getText().equals("") ? 0 : parseDouble(weightField.getText()));
         animal.setBirthDate(birthDateField.getText().equals("") ? null : Date.valueOf(birthDateField.getText()));
         animal.setChipNum(chipNumField.getText().equals("") ? null : chipNumField.getText());
         animal.setChipLocalisation(chipLocalisationField.getText().equals("")? null : chipLocalisationField.getText());
@@ -247,7 +258,7 @@ public class Formulaire extends JPanel {
     private boolean mandatoryFieldMissing() {
         if(animalIDField.getText().equals(""))
             return true;
-        if(raceIDField.getText().equals(""))
+        if(raceIDField.getSelectedItem().toString().equals(""))
             return true;
         if(arrivedDateField.getText().equals(""))
             return true;
@@ -271,7 +282,20 @@ public class Formulaire extends JPanel {
     }
 
     public void setRaceIDField(Integer raceIDField) {
-        this.raceIDField.setText(raceIDField == null ? "" : raceIDField.toString());
+        this.raceIDField.addItem(raceIDField == null ? "" : raceIDField.toString() + " - " + new Utils().getRaceName(raceIDField));
+    }
+
+    public void setRaceIDJCombobox() {
+        ArrayList<Race> races = new Utils().getAllRaces();
+        for(Race race : races)
+            raceIDField.addItem(race.getRaceID()+" - "+race.getRaceName());
+    }
+    public void setRaceIDJComboboxUpdate(Integer raceID) {
+        ArrayList<Race> races = new Utils().getAllRaces();
+        for(Race race : races){
+            raceIDField.addItem(race.getRaceID()+" - "+race.getRaceName());
+            if(race.getRaceID().equals(raceID)) {raceIDField.setSelectedIndex(raceID-1);}
+        }
     }
 
     public void setBirthDateField(java.sql.Date birthDateField) {
@@ -320,5 +344,23 @@ public class Formulaire extends JPanel {
 
     public void setReceptionIDField(String receptionIDField) {
         this.receptionIDField.setText(receptionIDField);
+    }
+
+    public void setSexFields(Boolean b) {
+        this.male.setSelected(b);
+        this.female.setSelected(!b);
+    }
+
+    public void setHairOrSkin(Boolean b) {
+        this.hair.setSelected(b);
+        this.skin.setSelected(!b);
+    }
+
+    public void setToIsolateCB(Boolean b) {
+        this.toIsolateCB.setSelected(b);
+    }
+
+    public void setSterilisedCB(Boolean b) {
+        this.sterilisedCB.setSelected(b);
     }
 }

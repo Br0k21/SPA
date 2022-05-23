@@ -128,8 +128,8 @@ public class Animal {
         return chipPlacementDate;
     }
 
-    public Integer getCellnum() {
-        return cellnum;
+    public Integer getCellNum() {
+        return cellnum == null ? 0 : cellnum;
     }
 
     public java.sql.Date getEuthanasiaDate() {
@@ -165,7 +165,7 @@ public class Animal {
     }
 
     public Double getWeight() {
-        return weight;
+        return weight == null ? 0 : weight;
     }
 
     public Boolean getHairOrSkin() {
@@ -190,5 +190,32 @@ public class Animal {
 
     public String getVeterinaryID() {
         return veterinaryID;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "animalID=" + animalID +
+                ", cellnum=" + cellnum +
+                ", raceID=" + raceID +
+                ", arrivedDate=" + arrivedDate +
+                ", birthDate=" + birthDate +
+                ", chipPlacementDate=" + chipPlacementDate +
+                ", tatooPlacementDate=" + tatooPlacementDate +
+                ", euthanasiaDate=" + euthanasiaDate +
+                ", chipNum='" + chipNum + '\'' +
+                ", chipLocalisation='" + chipLocalisation + '\'' +
+                ", tatooNum='" + tatooNum + '\'' +
+                ", euthanasiaReason='" + euthanasiaReason + '\'' +
+                ", name='" + name + '\'' +
+                ", receptionID='" + receptionID + '\'' +
+                ", veterinaryID='" + veterinaryID + '\'' +
+                ", weight=" + weight +
+                ", toIsolate=" + toIsolate +
+                ", sterilised=" + sterilised +
+                ", sex=" + sex +
+                ", hairOrSkin=" + hairOrSkin +
+                '}';
     }
 }

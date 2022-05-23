@@ -48,11 +48,11 @@ public class CRUDPanel extends JPanel {
             if(e.getSource() == create){
                 mainW.changeCenterPanel(new CreatePanel(mainW));
             } if(e.getSource() == update){
-
+                mainW.changeCenterPanel(new AnimalUpdate(mainW));
             } if(e.getSource() == delete) {
-
+                mainW.changeCenterPanel(new AnimalDelete(mainW));
             } if(e.getSource() == read) {
-                mainW.changeCenterPanel(new AnimalIDSearch(mainW));
+                mainW.changeCenterPanel(new AnimalIDRead(mainW));
             }
         }
     }

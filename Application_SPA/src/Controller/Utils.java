@@ -1,6 +1,7 @@
 package Controller;
 
 import Business.*;
+import DataAccess.Animal.AnimalDBAccess;
 import Model.*;
 
 import java.util.*;
@@ -42,5 +43,24 @@ public class Utils {
 
     public ArrayList<Integer> getAllID() {
         return new AnimalManager().getAllID();
+    }
+
+    public String getRaceName(Integer raceID) { return new RaceManager().getRaceName(raceID);}
+
+    public ArrayList<Race> getAllRaces() {
+        return new RaceManager().getAllRaces();
+    }
+
+    public void addAnimal(Animal animal) {
+        new AnimalManager().addNewAnimal(animal);
+    }
+
+    public void deleteAnimal(Integer animalID) {
+        new AnimalManager().deleteAnimal(animalID);
+    }
+    public void updateAnimal(Animal animal) {
+        // Vérif si pas n'importe quoi
+        deleteAnimal(animal.getAnimalID());
+        addAnimal(animal);
     }
 }

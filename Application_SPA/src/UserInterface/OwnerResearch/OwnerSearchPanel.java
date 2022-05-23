@@ -19,7 +19,7 @@ public class OwnerSearchPanel extends JPanel {
         search = new OwnerLabels();
         button = new EntryExitButtons() {
             @Override
-            public void validate() {
+            public void buttonValide() {
                 setCountry();
                 mainW.changeCenterPanel(new OwnerByCountry(country, mainW));
             }

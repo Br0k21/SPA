@@ -22,16 +22,19 @@ public class CreatePanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         panels = new Formulaire();
+        panels.setRaceIDJCombobox();
         buttons = new EntryExitButtons() {
             @Override
-            public void validate() {
+            public void buttonValide() {
                 Animal animal = new Animal();
-                System.out.println("Recu");
-                /*try {
+                try {
                     animal = panels.getNewAnimal();
+                    new Utils().addAnimal(animal);
+                    JOptionPane.showMessageDialog(null,"Ajout effectué !", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
+                    mainW.changeCenterPanel();
                 } catch (IncompletFieldException iE) {
                     JOptionPane.showMessageDialog(null, iE.getMessage(), "Champ incomplet", JOptionPane.ERROR_MESSAGE);
-                }*/
+                }
 
             }
 

@@ -11,4 +11,7 @@ public class AnimalManager {
     }
     public Integer getFreeID() { return new AnimalDBAccess().getFreeID();}
     public ArrayList<Integer> getAllID() { return new AnimalDBAccess().getAllID();}
+    public void addNewAnimal(Animal animal) {new AnimalDBAccess().addNewAnimal(animal);}
+    public void deleteAnimal(Integer animalID) {new AnimalDBAccess().deleteAnimal(animalID);}
+
 }
