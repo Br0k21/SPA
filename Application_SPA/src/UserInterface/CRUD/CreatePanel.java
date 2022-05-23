@@ -27,11 +27,11 @@ public class CreatePanel extends JPanel {
             public void validate() {
                 Animal animal = new Animal();
                 System.out.println("Recu");
-                try {
+                /*try {
                     animal = panels.getNewAnimal();
                 } catch (IncompletFieldException iE) {
                     JOptionPane.showMessageDialog(null, iE.getMessage(), "Champ incomplet", JOptionPane.ERROR_MESSAGE);
-                }
+                }*/
 
             }
 
