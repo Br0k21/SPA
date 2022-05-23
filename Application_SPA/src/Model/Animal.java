@@ -2,8 +2,7 @@ package Model;
 
 import com.mysql.cj.result.LocalDateTimeValueFactory;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.sql.Date;
 
 public class Animal {
     private Integer animalID, cellnum, raceID;
@@ -18,7 +17,7 @@ public class Animal {
     // Constructeur avec info min pour l'arrivée d'un animal
     public Animal(Boolean sex, Boolean hairOrSkin, Boolean toIsolate, Integer cellnum, Integer raceID, String receptionID, String veterinaryID){
         setNewAnimalId();
-        this.arrivedDate = new Date();
+        this.arrivedDate = new java.sql.Date(System.currentTimeMillis());
         setSex(sex);
         setHairOrSkin(hairOrSkin);
         setToIsolate(toIsolate);
@@ -37,11 +36,11 @@ public class Animal {
         this.animalID = animalID;
     }
 
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivedDate(java.sql.Date arrivedDate) {
         this.arrivedDate = arrivedDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(java.sql.Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -57,11 +56,11 @@ public class Animal {
         this.chipNum = chipNum;
     }
 
-    public void setChipPlacementDate(Date chipPlacementDate) {
+    public void setChipPlacementDate(java.sql.Date chipPlacementDate) {
         this.chipPlacementDate = chipPlacementDate;
     }
 
-    public void setEuthanasiaDate(Date euthanasiaDate) {
+    public void setEuthanasiaDate(java.sql.Date euthanasiaDate) {
         this.euthanasiaDate = euthanasiaDate;
     }
 
@@ -93,7 +92,7 @@ public class Animal {
         this.sex = sex;
     }
 
-    public void setTatooPlacementDate(Date tatooPlacementDate) {
+    public void setTatooPlacementDate(java.sql.Date tatooPlacementDate) {
         this.tatooPlacementDate = tatooPlacementDate;
     }
 
@@ -117,27 +116,27 @@ public class Animal {
         return animalID;
     }
 
-    public Date getArrivedDate() {
+    public java.sql.Date getArrivedDate() {
         return arrivedDate;
     }
 
-    public Date getBirthDate() {
+    public java.sql.Date getBirthDate() {
         return birthDate;
     }
 
-    public Date getChipPlacementDate() {
+    public java.sql.Date getChipPlacementDate() {
         return chipPlacementDate;
     }
 
-    public Integer getCellnum() {
-        return cellnum;
+    public Integer getCellNum() {
+        return cellnum == null ? 0 : cellnum;
     }
 
-    public Date getEuthanasiaDate() {
+    public java.sql.Date getEuthanasiaDate() {
         return euthanasiaDate;
     }
 
-    public Date getTatooPlacementDate() {
+    public java.sql.Date getTatooPlacementDate() {
         return tatooPlacementDate;
     }
 
@@ -166,7 +165,7 @@ public class Animal {
     }
 
     public Double getWeight() {
-        return weight;
+        return weight == null ? 0 : weight;
     }
 
     public Boolean getHairOrSkin() {
@@ -191,5 +190,32 @@ public class Animal {
 
     public String getVeterinaryID() {
         return veterinaryID;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "animalID=" + animalID +
+                ", cellnum=" + cellnum +
+                ", raceID=" + raceID +
+                ", arrivedDate=" + arrivedDate +
+                ", birthDate=" + birthDate +
+                ", chipPlacementDate=" + chipPlacementDate +
+                ", tatooPlacementDate=" + tatooPlacementDate +
+                ", euthanasiaDate=" + euthanasiaDate +
+                ", chipNum='" + chipNum + '\'' +
+                ", chipLocalisation='" + chipLocalisation + '\'' +
+                ", tatooNum='" + tatooNum + '\'' +
+                ", euthanasiaReason='" + euthanasiaReason + '\'' +
+                ", name='" + name + '\'' +
+                ", receptionID='" + receptionID + '\'' +
+                ", veterinaryID='" + veterinaryID + '\'' +
+                ", weight=" + weight +
+                ", toIsolate=" + toIsolate +
+                ", sterilised=" + sterilised +
+                ", sex=" + sex +
+                ", hairOrSkin=" + hairOrSkin +
+                '}';
     }
 }

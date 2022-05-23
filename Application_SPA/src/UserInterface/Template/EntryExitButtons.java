@@ -31,11 +31,11 @@ public abstract class EntryExitButtons extends JPanel{
     private class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == valide) validate();
+            if(e.getSource() == valide) buttonValide();
             if(e.getSource() == exit) out();
         }
     }
 
-    public abstract void validate();
+    public abstract void buttonValide();
     public abstract void out();
 }

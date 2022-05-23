@@ -1,6 +1,7 @@
 package UserInterface.OwnerResearch;
 
 import UserInterface.MainWindow;
+import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 public class OwnerSearchPanel extends JPanel {
     private MainWindow mainW;
     private OwnerLabels search;
-    private OwnerButton button;
+    private EntryExitButtons button;
     private String country;
 
     public OwnerSearchPanel(MainWindow mainW) {
@@ -16,7 +17,18 @@ public class OwnerSearchPanel extends JPanel {
         this.setLayout(new GridLayout(8,1));
 
         search = new OwnerLabels();
-        button = new OwnerButton(this);
+        button = new EntryExitButtons() {
+            @Override
+            public void buttonValide() {
+                setCountry();
+                mainW.changeCenterPanel(new OwnerByCountry(country, mainW));
+            }
+
+            @Override
+            public void out() {
+                mainW.changeCenterPanel();
+            }
+        };
 
         this.add(search);
         this.add(button);

@@ -16,7 +16,17 @@ public class TreatmentPanel extends JPanel {
         this.setLayout(new GridLayout(7,1));
 
         treatmentL = new TreatmentLabels();
-        treatmentB = new TreatmentButtons(mainW);
+        treatmentB = new EntryExitButtons() {
+            @Override
+            public void buttonValide() {
+                System.out.println("Treatment valider");
+            }
+
+            @Override
+            public void out() {
+                mainW.changeCenterPanel();
+            }
+        };
 
         this.add(treatmentL);
         this.add(treatmentB);

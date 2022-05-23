@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AnimalDBAccess implements IAnimalAccess{
     @Override
@@ -20,9 +21,28 @@ public class AnimalDBAccess implements IAnimalAccess{
 
             while (data.next()) {
                 if(data.getInt("animal_id") == animalID){
+                    // Obligatoire
                     animal.setAnimalID(data.getInt("animal_id"));
                     animal.setArrivedDate(data.getDate("arrived_date"));
                     animal.setName(data.getString("name"));
+                    animal.setCellnum(data.getInt("cell_num"));
+                    animal.setRaceID(data.getInt("race_id"));
+                    animal.setReceptionID(data.getString("reception"));
+                    animal.setVeterinaryID(data.getString("veterinary"));
+                    animal.setSex(data.getBoolean("sex"));
+                    animal.setSterilised(data.getBoolean("sterilised"));
+                    animal.setToIsolate(data.getBoolean("to_isolate"));
+                    animal.setHairOrSkin(data.getBoolean("hair_or_skin"));
+                    // Peuvent etre vide
+                    animal.setBirthDate(data.getDate("birth_date"));
+                    animal.setChipPlacementDate(data.getDate("chip_placement_date"));
+                    animal.setChipNum(data.getString("chip_num"));
+                    animal.setChipLocalisation(data.getString("chip_location"));
+                    animal.setTatooPlacementDate(data.getDate("tatoo_placement_date"));
+                    animal.setTatooNum(data.getString("tatoo_num"));
+                    animal.setEuthanasiaDate(data.getDate("euthanasia_date"));
+                    animal.setEuthanasiaReason(data.getString("euthanasia_reason"));
+                    animal.setWeight(data.getDouble("weight"));
                 }
 
             }
@@ -54,5 +74,71 @@ public class AnimalDBAccess implements IAnimalAccess{
         }
 
         return ++highestID;
+    }
+
+    @Override
+    public ArrayList<Integer> getAllID() {
+        ArrayList<Integer> ids = new ArrayList<>();
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connection.prepareStatement("select * from spa.animal");
+            ResultSet data = statement.executeQuery();
+
+            while(data.next())
+                ids.add(data.getInt("animal_id"));
+
+        } catch (SQLException SQLe) {
+            System.out.println("Impossible de récupérer le nouvgel ID animal ");
+        }
+
+        return ids;
+    }
+
+    @Override
+    public void addNewAnimal(Animal animal) {
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connection.prepareStatement("insert into spa.animal values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+            statement.setInt(1,animal.getAnimalID());
+            statement.setDate(2, animal.getArrivedDate());
+            statement.setDate(3,animal.getBirthDate());
+            statement.setString(4, animal.getChipNum());
+            statement.setString(5, animal.getChipLocalisation());
+            statement.setString(6, animal.getTatooNum());
+            statement.setDate(7, animal.getTatooPlacementDate());
+            statement.setBoolean(8, animal.getSex());
+            statement.setBoolean(9, animal.getSterilised());
+            statement.setBoolean(10, animal.getHairOrSkin());
+            statement.setBoolean(11,animal.getToIsolate());
+            statement.setDouble(12, animal.getWeight());
+            statement.setDate(13, animal.getEuthanasiaDate());
+            statement.setString(14, animal.getEuthanasiaReason());
+            statement.setInt(15, animal.getCellNum());
+            statement.setInt(16, animal.getRaceID());
+            statement.setString(17, animal.getReceptionID());
+            statement.setString(18, animal.getVeterinaryID());
+            statement.setString(19, animal.getName());
+            statement.setDate(20, animal.getChipPlacementDate());
+            statement.executeUpdate();
+
+        } catch (SQLException SQLe) {
+            System.out.println("Impossible d'ajouter le nouvel animal");
+        }
+    }
+
+    public void deleteAnimal(Integer animalID) {
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connection.prepareStatement("delete from spa.animal where animal_id = ?");
+            statement.setInt(1, animalID);
+            statement.executeUpdate();
+
+        } catch (SQLException SQLe) {
+            System.out.println("Impossible de supprimer l'animal");
+        }
     }
 }
