@@ -2,6 +2,7 @@ package UserInterface.Template;
 
 import Controller.Utils;
 import Model.Animal;
+import Model.Exceptions.ConnectionException;
 import UserInterface.CRUD.Formulaire;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
@@ -59,7 +60,13 @@ public abstract class DisplayAnimalPanel extends JPanel {
     }
 
     public Animal getAnimal() {
-        return new Utils().getAnimal(animalID);
+        Animal animal = new Animal();
+        try {
+            animal = new Utils().getAnimal(animalID);
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        return animal;
     }
     public abstract void setRaceID();
 }

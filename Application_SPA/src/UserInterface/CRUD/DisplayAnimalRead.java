@@ -1,10 +1,12 @@
 package UserInterface.CRUD;
 
 import Controller.Utils;
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainWindow;
 import UserInterface.Template.DisplayAnimalPanel;
 import UserInterface.Template.EntryExitButtons;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class DisplayAnimalRead extends DisplayAnimalPanel {
@@ -31,6 +33,10 @@ public class DisplayAnimalRead extends DisplayAnimalPanel {
 
     @Override
     public void setRaceID() {
-        formulaire.setRaceIDField(new Utils().getAnimal(animalID).getRaceID());
+        try {
+            formulaire.setRaceIDField(new Utils().getAnimal(animalID).getRaceID());
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

@@ -2,6 +2,8 @@ package UserInterface.CRUD;
 
 import Controller.Utils;
 import Model.Animal;
+import Model.Exceptions.AjoutException;
+import Model.Exceptions.ConnectionException;
 import Model.Exceptions.IncompletFieldException;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
@@ -32,7 +34,7 @@ public class CreatePanel extends JPanel {
                     new Utils().addAnimal(animal);
                     JOptionPane.showMessageDialog(null,"Ajout effectué !", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
                     mainW.changeCenterPanel();
-                } catch (IncompletFieldException iE) {
+                } catch (IncompletFieldException | ConnectionException | AjoutException iE) {
                     JOptionPane.showMessageDialog(null, iE.getMessage(), "Champ incomplet", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -43,7 +45,11 @@ public class CreatePanel extends JPanel {
                 mainW.changeCenterPanel();
             }
         };
-        panels.setAnimalIDField(new Utils().getFreeID());
+        try {
+            panels.setAnimalIDField(new Utils().getFreeID());
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         panels.setArrivedDateField(new java.sql.Date(millis));
         this.add(panels, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.SOUTH);

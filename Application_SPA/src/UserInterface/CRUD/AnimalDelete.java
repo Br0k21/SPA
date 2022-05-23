@@ -1,6 +1,8 @@
 package UserInterface.CRUD;
 
 import Controller.Utils;
+import Model.Exceptions.ConnectionException;
+import Model.Exceptions.DeleteException;
 import UserInterface.MainWindow;
 import UserInterface.Template.AnimalID;
 import UserInterface.Template.EntryExitButtons;
@@ -17,8 +19,12 @@ public class AnimalDelete extends AnimalID {
         buttons = new EntryExitButtons() {
             @Override
             public void buttonValide() {
-                new Utils().deleteAnimal(animals.getSelectedIndex() + 1);
-                JOptionPane.showMessageDialog(null, "Suppression effectuée", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
+                try {
+                    new Utils().deleteAnimal(animals.getSelectedIndex() + 1);
+                    JOptionPane.showMessageDialog(null, "Suppression effectuée", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
+                } catch (DeleteException | ConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             @Override

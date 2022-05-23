@@ -1,5 +1,6 @@
 package UserInterface.OwnerResearch;
 
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
 
@@ -12,7 +13,7 @@ public class OwnerSearchPanel extends JPanel {
     private EntryExitButtons button;
     private String country;
 
-    public OwnerSearchPanel(MainWindow mainW) {
+    public OwnerSearchPanel(MainWindow mainW) throws ConnectionException {
         this.mainW = mainW;
         this.setLayout(new GridLayout(8,1));
 

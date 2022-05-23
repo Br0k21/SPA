@@ -1,5 +1,7 @@
 package UserInterface.OwnerResearch;
 
+import Model.Exceptions.ConnectionException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class OwnerLabels extends JPanel {
     private JComboBox<String> country;
     private JLabel countriesL;
 
-    public OwnerLabels() {
+    public OwnerLabels() throws ConnectionException {
         this.setLayout(new FlowLayout());
         utils = new Controller.Utils();
 

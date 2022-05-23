@@ -3,6 +3,7 @@ package UserInterface;
 import Model.*;
 
 import Controller.ThreadHeure;
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainPanel.HeurePanel;
 import UserInterface.MainPanel.MainPanel;
 import UserInterface.OwnerResearch.OwnerSearchPanel;
@@ -167,7 +168,11 @@ public class MainWindow extends Wnds {
         // Ajout des panneaux
         panels.put("main", new MainPanel(window));
         panels.put("time", new HeurePanel(new GregorianCalendar()));
-        panels.put("owner", new OwnerSearchPanel(window));
+        try {
+            panels.put("owner", new OwnerSearchPanel(window));
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         panels.put("treatmentForm", new TreatmentPanel(window));
 
         return panels;

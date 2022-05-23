@@ -1,6 +1,7 @@
 package DataAccess.Race;
 
 import DataAccess.SingletonConnexion;
+import Model.Exceptions.ConnectionException;
 import Model.Race;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class RaceDBAccess implements IRaceAccess{
     private String raceName;
     @Override
-    public String getRaceName(Integer raceID) {
+    public String getRaceName(Integer raceID) throws ConnectionException {
         try {
             Connection connection = SingletonConnexion.getInstance();
 
@@ -31,7 +32,7 @@ public class RaceDBAccess implements IRaceAccess{
     }
 
     @Override
-    public ArrayList<Race> getAllRaces() {
+    public ArrayList<Race> getAllRaces() throws ConnectionException {
         ArrayList<Race> races = new ArrayList<>();
         try {
             Connection connection = SingletonConnexion.getInstance();

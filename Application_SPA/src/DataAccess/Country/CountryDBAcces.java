@@ -1,13 +1,14 @@
 package DataAccess.Country;
 
 import DataAccess.SingletonConnexion;
+import Model.Exceptions.ConnectionException;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CountryDBAcces implements ICountryAccess{
     @Override
-    public void getCountries(ArrayList<String > countries) {
+    public void getCountries(ArrayList<String > countries) throws ConnectionException {
         try {
             Connection connection = SingletonConnexion.getInstance();
 
@@ -19,7 +20,7 @@ public class CountryDBAcces implements ICountryAccess{
                 countries.add(data.getString("country_name"));
             }
 
-            //connection.close();
+
         } catch (SQLException SQLe) {
             System.out.println("Récupération des pays impossible");
         }

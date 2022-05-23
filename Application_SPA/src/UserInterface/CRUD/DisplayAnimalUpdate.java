@@ -2,6 +2,9 @@ package UserInterface.CRUD;
 
 import Controller.Utils;
 import Model.Animal;
+import Model.Exceptions.AjoutException;
+import Model.Exceptions.ConnectionException;
+import Model.Exceptions.DeleteException;
 import Model.Exceptions.IncompletFieldException;
 import UserInterface.MainWindow;
 import UserInterface.Template.DisplayAnimalPanel;
@@ -26,6 +29,10 @@ public class DisplayAnimalUpdate extends DisplayAnimalPanel {
                     mainW.changeCenterPanel();
                 } catch(IncompletFieldException ifE) {
                     JOptionPane.showMessageDialog(null, ifE.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                } catch (DeleteException | AjoutException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                } catch (ConnectionException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -40,6 +47,10 @@ public class DisplayAnimalUpdate extends DisplayAnimalPanel {
 
     @Override
     public void setRaceID() {
-        formulaire.setRaceIDJComboboxUpdate(new Utils().getAnimal(animalID).getRaceID());
+        try {
+            formulaire.setRaceIDJComboboxUpdate(new Utils().getAnimal(animalID).getRaceID());
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

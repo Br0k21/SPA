@@ -2,6 +2,7 @@ package UserInterface.OwnerResearch;
 
 import Model.*;
 import Controller.*;
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainWindow;
 
 import javax.swing.*;
@@ -42,7 +43,11 @@ public class OwnerByCountry extends JPanel {
             }
         });
 
-        owners = utils.getOwnersFrom(country);
+        try {
+            owners = utils.getOwnersFrom(country);
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         animals = new ArrayList<>();
         inCharges = new ArrayList<>();
 
@@ -57,8 +62,12 @@ public class OwnerByCountry extends JPanel {
 
     private void completeArrays() {
         for(int iOwner =0; iOwner < owners.size(); iOwner++){
-            inCharges.add(utils.getInCharge(owners.get(iOwner).getNationalRegisterNum()));
-            animals.add(utils.getAnimal(inCharges.get(iOwner).getAnimalID()));
+            try {
+                inCharges.add(utils.getInCharge(owners.get(iOwner).getNationalRegisterNum()));
+                animals.add(utils.getAnimal(inCharges.get(iOwner).getAnimalID()));
+            } catch (ConnectionException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package UserInterface.CRUD;
 
 import Controller.Utils;
 import Model.Animal;
+import Model.Exceptions.ConnectionException;
 import Model.Exceptions.IncompletFieldException;
 import Model.Race;
 import UserInterface.MainWindow;
@@ -282,16 +283,30 @@ public class Formulaire extends JPanel {
     }
 
     public void setRaceIDField(Integer raceIDField) {
-        this.raceIDField.addItem(raceIDField == null ? "" : raceIDField.toString() + " - " + new Utils().getRaceName(raceIDField));
+        try {
+            this.raceIDField.addItem(raceIDField == null ? "" : raceIDField.toString() + " - " + new Utils().getRaceName(raceIDField));
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void setRaceIDJCombobox() {
-        ArrayList<Race> races = new Utils().getAllRaces();
+        ArrayList<Race> races = null;
+        try {
+            races = new Utils().getAllRaces();
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         for(Race race : races)
             raceIDField.addItem(race.getRaceID()+" - "+race.getRaceName());
     }
     public void setRaceIDJComboboxUpdate(Integer raceID) {
-        ArrayList<Race> races = new Utils().getAllRaces();
+        ArrayList<Race> races = null;
+        try {
+            races = new Utils().getAllRaces();
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
         for(Race race : races){
             raceIDField.addItem(race.getRaceID()+" - "+race.getRaceName());
             if(race.getRaceID().equals(raceID)) {raceIDField.setSelectedIndex(raceID-1);}

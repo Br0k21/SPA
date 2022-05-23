@@ -2,6 +2,7 @@ package DataAccess.Person;
 
 import Business.*;
 import DataAccess.SingletonConnexion;
+import Model.Exceptions.ConnectionException;
 import Model.Person;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public class PersonDBAccess implements IPersonAccess{
     @Override
-    public void getPersons(ArrayList<Person> persons) {
+    public void getPersons(ArrayList<Person> persons) throws ConnectionException {
         try {
             Connection connection = SingletonConnexion.getInstance();
 
@@ -25,7 +26,7 @@ public class PersonDBAccess implements IPersonAccess{
     }
 
     @Override
-    public ArrayList<Person> getPersonsFrom(String country) {
+    public ArrayList<Person> getPersonsFrom(String country) throws ConnectionException {
         ArrayList<Person> persons = new ArrayList<>();
         try {
             Connection connection = SingletonConnexion.getInstance();

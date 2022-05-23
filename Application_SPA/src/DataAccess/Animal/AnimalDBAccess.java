@@ -2,6 +2,9 @@ package DataAccess.Animal;
 
 import DataAccess.SingletonConnexion;
 import Model.Animal;
+import Model.Exceptions.AjoutException;
+import Model.Exceptions.ConnectionException;
+import Model.Exceptions.DeleteException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,40 +14,38 @@ import java.util.ArrayList;
 
 public class AnimalDBAccess implements IAnimalAccess{
     @Override
-    public Animal getAnimal(Integer animalID) {
+    public Animal getAnimal(Integer animalID) throws ConnectionException {
         Animal animal = new Animal();
         try {
             Connection connection = SingletonConnexion.getInstance();
 
-            PreparedStatement statement = connection.prepareStatement("select * from spa.animal");
+            PreparedStatement statement = connection.prepareStatement("select * from spa.animal where animal_id = ?");
+            statement.setInt(1, animalID);
             ResultSet data = statement.executeQuery();
 
             while (data.next()) {
-                if(data.getInt("animal_id") == animalID){
-                    // Obligatoire
-                    animal.setAnimalID(data.getInt("animal_id"));
-                    animal.setArrivedDate(data.getDate("arrived_date"));
-                    animal.setName(data.getString("name"));
-                    animal.setCellnum(data.getInt("cell_num"));
-                    animal.setRaceID(data.getInt("race_id"));
-                    animal.setReceptionID(data.getString("reception"));
-                    animal.setVeterinaryID(data.getString("veterinary"));
-                    animal.setSex(data.getBoolean("sex"));
-                    animal.setSterilised(data.getBoolean("sterilised"));
-                    animal.setToIsolate(data.getBoolean("to_isolate"));
-                    animal.setHairOrSkin(data.getBoolean("hair_or_skin"));
-                    // Peuvent etre vide
-                    animal.setBirthDate(data.getDate("birth_date"));
-                    animal.setChipPlacementDate(data.getDate("chip_placement_date"));
-                    animal.setChipNum(data.getString("chip_num"));
-                    animal.setChipLocalisation(data.getString("chip_location"));
-                    animal.setTatooPlacementDate(data.getDate("tatoo_placement_date"));
-                    animal.setTatooNum(data.getString("tatoo_num"));
-                    animal.setEuthanasiaDate(data.getDate("euthanasia_date"));
-                    animal.setEuthanasiaReason(data.getString("euthanasia_reason"));
-                    animal.setWeight(data.getDouble("weight"));
-                }
-
+                // Obligatoire
+                animal.setAnimalID(data.getInt("animal_id"));
+                animal.setArrivedDate(data.getDate("arrived_date"));
+                animal.setName(data.getString("name"));
+                animal.setCellnum(data.getInt("cell_num"));
+                animal.setRaceID(data.getInt("race_id"));
+                animal.setReceptionID(data.getString("reception"));
+                animal.setVeterinaryID(data.getString("veterinary"));
+                animal.setSex(data.getBoolean("sex"));
+                animal.setSterilised(data.getBoolean("sterilised"));
+                animal.setToIsolate(data.getBoolean("to_isolate"));
+                animal.setHairOrSkin(data.getBoolean("hair_or_skin"));
+                // Peuvent etre vide
+                animal.setBirthDate(data.getDate("birth_date"));
+                animal.setChipPlacementDate(data.getDate("chip_placement_date"));
+                animal.setChipNum(data.getString("chip_num"));
+                animal.setChipLocalisation(data.getString("chip_location"));
+                animal.setTatooPlacementDate(data.getDate("tatoo_placement_date"));
+                animal.setTatooNum(data.getString("tatoo_num"));
+                animal.setEuthanasiaDate(data.getDate("euthanasia_date"));
+                animal.setEuthanasiaReason(data.getString("euthanasia_reason"));
+                animal.setWeight(data.getDouble("weight"));
             }
 
         } catch (SQLException SQLe) {
@@ -54,7 +55,7 @@ public class AnimalDBAccess implements IAnimalAccess{
     }
 
     @Override
-    public int getFreeID() {
+    public int getFreeID() throws ConnectionException {
         Animal animal = new Animal();
         int highestID = 0;
         try {
@@ -77,7 +78,7 @@ public class AnimalDBAccess implements IAnimalAccess{
     }
 
     @Override
-    public ArrayList<Integer> getAllID() {
+    public ArrayList<Integer> getAllID() throws ConnectionException {
         ArrayList<Integer> ids = new ArrayList<>();
         try {
             Connection connection = SingletonConnexion.getInstance();
@@ -96,7 +97,7 @@ public class AnimalDBAccess implements IAnimalAccess{
     }
 
     @Override
-    public void addNewAnimal(Animal animal) {
+    public void addNewAnimal(Animal animal) throws ConnectionException, AjoutException {
         try {
             Connection connection = SingletonConnexion.getInstance();
 
@@ -125,11 +126,11 @@ public class AnimalDBAccess implements IAnimalAccess{
             statement.executeUpdate();
 
         } catch (SQLException SQLe) {
-            System.out.println("Impossible d'ajouter le nouvel animal");
+            throw new AjoutException();
         }
     }
 
-    public void deleteAnimal(Integer animalID) {
+    public void deleteAnimal(Integer animalID) throws DeleteException, ConnectionException {
         try {
             Connection connection = SingletonConnexion.getInstance();
 
@@ -138,7 +139,7 @@ public class AnimalDBAccess implements IAnimalAccess{
             statement.executeUpdate();
 
         } catch (SQLException SQLe) {
-            System.out.println("Impossible de supprimer l'animal");
+            throw new DeleteException(getAnimal(animalID).getName());
         }
     }
 }

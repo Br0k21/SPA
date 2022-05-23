@@ -1,6 +1,7 @@
 package UserInterface.Template;
 
 import Controller.Utils;
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
 
@@ -21,16 +22,20 @@ public abstract class AnimalID extends JPanel {
         this.setLayout(new GridLayout(10,1));
 
         IDAnimal = new JLabel("ID de l'animal : ");
-        animalsID = new Utils().getAllID();
-        animals = new JComboBox<>();
-        for(Integer id : animalsID)
-            animals.addItem(id +" - "+ new Utils().getAnimal(id).getName());
-        labelsPanels = new JPanel();
-        labelsPanels.setLayout(new GridLayout(1,2));
-        labelsPanels.add(IDAnimal);
-        labelsPanels.add(animals);
+        try {
+            animalsID = new Utils().getAllID();
+            animals = new JComboBox<>();
+            for(Integer id : animalsID)
+                animals.addItem(id +" - "+ new Utils().getAnimal(id).getName());
+            labelsPanels = new JPanel();
+            labelsPanels.setLayout(new GridLayout(1,2));
+            labelsPanels.add(IDAnimal);
+            labelsPanels.add(animals);
 
-        this.add(labelsPanels);
+            this.add(labelsPanels);
+        } catch (ConnectionException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 }
