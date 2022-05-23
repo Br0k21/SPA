@@ -39,4 +39,8 @@ public class Utils {
     }
 
     public Integer getFreeID(){ return new AnimalManager().getFreeID();}
+
+    public ArrayList<Integer> getAllID() {
+        return new AnimalManager().getAllID();
+    }
 }

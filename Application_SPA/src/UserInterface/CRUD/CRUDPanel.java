@@ -52,7 +52,7 @@ public class CRUDPanel extends JPanel {
             } if(e.getSource() == delete) {
 
             } if(e.getSource() == read) {
-
+                mainW.changeCenterPanel(new AnimalIDSearch(mainW));
             }
         }
     }

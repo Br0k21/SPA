@@ -1,4 +1,4 @@
-package SuperClass;
+package UserInterface.CRUD;
 
 import Model.Animal;
 import Model.Exceptions.IncompletFieldException;
@@ -16,7 +16,6 @@ import static java.lang.Integer.parseInt;
 
 
 public class Formulaire extends JPanel {
-    private MainWindow mainW;
 
     private JLabel animalID, cellnum, raceID, arrivedDate, birthDate, chipPlacementDate, tatooPlacementDate, euthanasiaDate, chipNum, chipLocalisation, tatooNum, euthanasiaReason, name, receptionID, veterinaryID, weight;
     private ButtonGroup sex, hairOrSkin;
@@ -26,9 +25,8 @@ public class Formulaire extends JPanel {
     private JTextField animalIDField, cellnumField, raceIDField, arrivedDateField, birthDateField, chipPlacementDateField, tatooPlacementDateField, euthanasiaDateField, chipNumField, chipLocalisationField, tatooNumField, euthanasiaReasonField, nameField, receptionIDField, veterinaryIDField, sexField, weightField;
     private CheckBoxListener CBlistenner;
 
-    public Formulaire(MainWindow mainW) {
-        this.mainW =mainW;
-        this.setLayout(new GridLayout(20, 2, 5, 5));
+    public Formulaire() {
+        this.setLayout(new GridLayout(19, 2, 5, 5));
         // init
         // labels
         animalID = new JLabel("Animal ID :");
@@ -167,6 +165,8 @@ public class Formulaire extends JPanel {
 
         weightField.setEnabled(b);
 
+        cellnumField.setEnabled(b);
+
         arrivedDateField.setEnabled(b);
 
         birthDateField.setEnabled(b);
@@ -244,14 +244,6 @@ public class Formulaire extends JPanel {
         }
     }
 
-    public void setAnimalIDField(Integer animalID) {
-        this.animalIDField.setText(animalID.toString());
-    }
-
-    public void setArrivedDateField(GregorianCalendar date) {
-        this.arrivedDateField.setText(date.getTime().toString());
-    }
-
     private boolean mandatoryFieldMissing() {
         if(animalIDField.getText().equals(""))
             return true;
@@ -265,5 +257,68 @@ public class Formulaire extends JPanel {
             return true;
 
         return false;
+    }
+    public void setAnimalIDField(Integer animalID) {
+        this.animalIDField.setText(animalID.toString());
+    }
+
+    public void setArrivedDateField(Date date) {
+        this.arrivedDateField.setText(date.toString());
+    }
+
+    public void setCellnumField(Integer cellnumField) {
+        this.cellnumField.setText(cellnumField == null ? "" : cellnumField.toString());
+    }
+
+    public void setRaceIDField(Integer raceIDField) {
+        this.raceIDField.setText(raceIDField == null ? "" : raceIDField.toString());
+    }
+
+    public void setBirthDateField(java.sql.Date birthDateField) {
+        this.birthDateField.setText(birthDateField == null ? "" : birthDateField.toString());
+    }
+
+    public void setChipPlacementDateField(java.sql.Date chipPlacementDateField) {
+        this.chipPlacementDateField.setText(chipPlacementDateField == null ? "" : chipPlacementDateField.toString());
+    }
+
+    public void setChipNumField(String chipNumField) {
+        this.chipNumField.setText(chipNumField == null ? "" : chipNumField);
+    }
+
+    public void setChipLocalisation(String chipLocalisation) {
+        this.chipLocalisationField.setText(chipLocalisation == null ? "" : chipLocalisation);
+    }
+
+    public void setTatooPlacementDate(java.sql.Date tatooPlacementDate) {
+        this.tatooPlacementDateField.setText(tatooPlacementDate == null ? "" : tatooPlacementDate.toString());
+    }
+
+    public void setTatooNumField(String tatooNumField) {
+        this.tatooNumField.setText(tatooNumField == null ? "" : tatooNumField);
+    }
+
+    public void setEuthanasiaDateField(java.sql.Date euthanasiaDateField) {
+        this.euthanasiaDateField.setText(euthanasiaDateField == null ? "" :euthanasiaDateField.toString());
+    }
+
+    public void setEuthanasiaReasonField(String euthanasiaReasonField) {
+        this.euthanasiaReasonField.setText(euthanasiaReasonField == null ? "" : euthanasiaReasonField);
+    }
+
+    public void setNameField(String nameField) {
+        this.nameField.setText(nameField);
+    }
+
+    public void setWeightField(Double weightField) {
+        this.weightField.setText(weightField == null ? "" : weightField.toString());
+    }
+
+    public void setVeterinaryIDField(String veterinaryIDField) {
+        this.veterinaryIDField.setText(veterinaryIDField);
+    }
+
+    public void setReceptionIDField(String receptionIDField) {
+        this.receptionIDField.setText(receptionIDField);
     }
 }

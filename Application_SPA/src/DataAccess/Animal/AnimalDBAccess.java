@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AnimalDBAccess implements IAnimalAccess{
     @Override
@@ -54,5 +55,24 @@ public class AnimalDBAccess implements IAnimalAccess{
         }
 
         return ++highestID;
+    }
+
+    @Override
+    public ArrayList<Integer> getAllID() {
+        ArrayList<Integer> ids = new ArrayList<>();
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connection.prepareStatement("select * from spa.animal");
+            ResultSet data = statement.executeQuery();
+
+            while(data.next())
+                ids.add(data.getInt("animal_id"));
+
+        } catch (SQLException SQLe) {
+            System.out.println("Impossible de récupérer le nouvgel ID animal ");
+        }
+
+        return ids;
     }
 }
