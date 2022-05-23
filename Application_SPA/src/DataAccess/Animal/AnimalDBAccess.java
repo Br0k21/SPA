@@ -48,12 +48,11 @@ public class AnimalDBAccess implements IAnimalAccess{
                     highestID = data.getInt("animal_id");
                 }
             }
-            connection.close();
 
         } catch (SQLException SQLe) {
             System.out.println("Impossible de récupérer le nouvgel ID animal ");
         }
 
-        return highestID++;
+        return ++highestID;
     }
 }

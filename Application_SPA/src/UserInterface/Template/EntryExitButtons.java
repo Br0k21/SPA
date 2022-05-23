@@ -25,7 +25,7 @@ public abstract class EntryExitButtons extends JPanel{
     }
 
     public EntryExitButtons() {
-        this(new JButton("valider"), new JButton("Retour"));
+        this(new JButton("Valider"), new JButton("Retour"));
     }
 
     private class ButtonListener implements ActionListener {

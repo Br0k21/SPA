@@ -29,7 +29,6 @@ public class PersonDBAccess implements IPersonAccess{
         ArrayList<Person> persons = new ArrayList<>();
         try {
             Connection connection = SingletonConnexion.getInstance();
-            LocationManager loc = new LocationManager();
 
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM spa.person p, spa.location l where p.pers_city = l.city AND p.pers_postal_code = l.postal_code");
             ResultSet data = statement.executeQuery();
@@ -41,6 +40,8 @@ public class PersonDBAccess implements IPersonAccess{
         } catch (SQLException SQLe) {
             System.out.println("Récupération des personnes venant de " + country + " impossible");
         }
+
+
 
         return persons;
     }

@@ -1,5 +1,6 @@
 package UserInterface.MainPanel;
 
+import UserInterface.CRUD.CRUDPanel;
 import UserInterface.MainWindow;
 
 import javax.swing.*;

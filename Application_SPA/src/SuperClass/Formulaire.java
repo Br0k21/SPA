@@ -1,6 +1,5 @@
-package UserInterface.Template;
+package SuperClass;
 
-import Controller.Utils;
 import Model.Animal;
 import Model.Exceptions.IncompletFieldException;
 import UserInterface.MainWindow;
@@ -10,14 +9,13 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import static java.lang.Integer.*;
-import static java.lang.Double.*;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 
 
-public class Crud extends JPanel {
+public class Formulaire extends JPanel {
     private MainWindow mainW;
 
     private JLabel animalID, cellnum, raceID, arrivedDate, birthDate, chipPlacementDate, tatooPlacementDate, euthanasiaDate, chipNum, chipLocalisation, tatooNum, euthanasiaReason, name, receptionID, veterinaryID, weight;
@@ -28,9 +26,8 @@ public class Crud extends JPanel {
     private JTextField animalIDField, cellnumField, raceIDField, arrivedDateField, birthDateField, chipPlacementDateField, tatooPlacementDateField, euthanasiaDateField, chipNumField, chipLocalisationField, tatooNumField, euthanasiaReasonField, nameField, receptionIDField, veterinaryIDField, sexField, weightField;
     private CheckBoxListener CBlistenner;
 
-    public Crud (MainWindow mainW) {
+    public Formulaire(MainWindow mainW) {
         this.mainW =mainW;
-        //mainW.getContainer().setSize(150, 300);
         this.setLayout(new GridLayout(20, 2, 5, 5));
         // init
         // labels

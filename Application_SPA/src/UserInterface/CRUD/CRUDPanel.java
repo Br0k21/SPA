@@ -1,4 +1,4 @@
-package UserInterface.MainPanel;
+package UserInterface.CRUD;
 
 import UserInterface.MainWindow;
 
@@ -46,7 +46,7 @@ public class CRUDPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == create){
-                mainW.changeCenterPanel(new AddPanel(mainW));
+                mainW.changeCenterPanel(new CreatePanel(mainW));
             } if(e.getSource() == update){
 
             } if(e.getSource() == delete) {

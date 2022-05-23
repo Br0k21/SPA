@@ -1,36 +1,35 @@
-package UserInterface.MainPanel;
+package UserInterface.CRUD;
 
 import Controller.Utils;
-import Model.*;
-import Model.Exceptions.IncompletFieldException;
-import UserInterface.*;
-import UserInterface.Template.*;
+import Model.Animal;
+import SuperClass.Formulaire;
+import UserInterface.MainWindow;
+import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class AddPanel extends Crud {
+public class CreatePanel extends JPanel {
     private MainWindow mainW;
-    private Crud panels;
+    private Formulaire panels;
     private EntryExitButtons buttons;
 
-    public AddPanel(MainWindow mainW) {
-        super(mainW);
+    public CreatePanel(MainWindow mainW) {
+        this.mainW = mainW;
         this.setLayout(new BorderLayout());
 
-        panels = new Crud(mainW);
+        panels = new Formulaire(mainW);
         buttons = new EntryExitButtons() {
             @Override
             public void validate() {
                 Animal animal = new Animal();
                 System.out.println("Recu");
-                try {
+                /*try {
                     animal = getNewAnimal();
                 } catch (IncompletFieldException iE) {
                     JOptionPane.showMessageDialog(null, iE.getMessage(), "Champ incomplet", JOptionPane.ERROR_MESSAGE);
-                }
+                }*/
 
             }
 
@@ -44,5 +43,7 @@ public class AddPanel extends Crud {
         this.add(panels, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.SOUTH);
     }
+
+
 
 }
