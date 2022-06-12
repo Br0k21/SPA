@@ -70,6 +70,7 @@ public class MainWindow extends Wnds {
         getContainer().add(newPanel, BorderLayout.CENTER);
         getContainer().add(getPanelList().get(Constant.TIME), BorderLayout.SOUTH);
         getContainer().validate();
+        // Refresh du panneau
         SwingUtilities.updateComponentTreeUI(this);
     }
 
