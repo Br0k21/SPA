@@ -27,12 +27,8 @@ public class DisplayAnimalUpdate extends DisplayAnimalPanel {
                     new Utils().updateAnimal(newAnimal);
                     JOptionPane.showMessageDialog(null, "Ajout effectué", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                     mainW.changeCenterPanel();
-                } catch(IncompletFieldException ifE) {
+                } catch(IncompletFieldException | DeleteException | AjoutException | ConnectionException ifE) {
                     JOptionPane.showMessageDialog(null, ifE.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                } catch (DeleteException | AjoutException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-                } catch (ConnectionException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
