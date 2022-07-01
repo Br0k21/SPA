@@ -22,8 +22,13 @@ public class ConnexionPanel extends JPanel {
         connexionB = new EntryExitButtons() {
             @Override
             public void buttonValide() {
-                MainWindow w = new MainWindow();
-                coW.dispose();
+                /*boolean connexionAccepted;
+                String name;
+
+
+                if(connexionAccepted)
+                    connexion();*/
+                connexion();
             }
 
             @Override
@@ -38,4 +43,11 @@ public class ConnexionPanel extends JPanel {
 
         this.setVisible(true);
     }
+
+    private void connexion() {
+        MainWindow w = new MainWindow();
+        coW.dispose();
+    }
 }
+
+

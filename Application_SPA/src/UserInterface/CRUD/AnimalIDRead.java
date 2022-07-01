@@ -13,7 +13,7 @@ public class AnimalIDRead extends AnimalID {
         buttons = new EntryExitButtons() {
             @Override
             public void buttonValide() {
-                mainW.changeCenterPanel(new DisplayAnimalRead(mainW, animals.getSelectedIndex() + 1, false));
+                mainW.changeCenterPanel(new DisplayAnimalRead(mainW, getAnimalID(), false));
             }
 
             @Override
@@ -23,9 +23,5 @@ public class AnimalIDRead extends AnimalID {
         };
 
         this.add(buttons);
-    }
-
-    public Integer getAnimalID() {
-        return animals.getSelectedIndex()+1;
     }
 }

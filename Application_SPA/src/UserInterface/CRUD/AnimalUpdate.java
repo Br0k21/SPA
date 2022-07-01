@@ -14,7 +14,7 @@ public class AnimalUpdate extends AnimalID {
             @Override
             public void buttonValide() {
                 System.out.println(animals.getSelectedIndex() + 1);
-                mainW.changeCenterPanel(new DisplayAnimalUpdate(mainW, animals.getSelectedIndex() + 1, true));
+                mainW.changeCenterPanel(new DisplayAnimalUpdate(mainW, getAnimalID(), true));
             }
 
             @Override

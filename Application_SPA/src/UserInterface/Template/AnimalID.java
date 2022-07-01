@@ -37,5 +37,9 @@ public abstract class AnimalID extends JPanel {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
 
+
+    }
+    public Integer getAnimalID() {
+        return animalsID.get(animals.getSelectedIndex());
     }
 }

@@ -21,7 +21,7 @@ public class AnimalDelete extends AnimalID {
             public void buttonValide() {
                 try {
                     // //!\\ numéro ID != index+1
-                    new Utils().deleteAnimal(animals.getSelectedIndex() + 1);
+                    new Utils().deleteAnimal(getAnimalID());
                     JOptionPane.showMessageDialog(null, "Suppression effectuée", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
                 } catch (DeleteException | ConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur", JOptionPane.ERROR_MESSAGE);

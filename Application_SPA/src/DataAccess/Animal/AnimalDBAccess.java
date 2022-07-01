@@ -134,6 +134,8 @@ public class AnimalDBAccess implements IAnimalAccess{
         try {
             Connection connection = SingletonConnexion.getInstance();
 
+            // Si l'animal à un maitre, il faut d'abord supprimer son lien in_charg
+            // Ou impossibilité de supp un animal qui est adopté
             PreparedStatement statement = connection.prepareStatement("delete from spa.animal where animal_id = ?");
             statement.setInt(1, animalID);
             statement.executeUpdate();
