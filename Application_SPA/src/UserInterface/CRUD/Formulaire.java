@@ -35,31 +35,50 @@ public class Formulaire extends JPanel {
         // init
         // labels
         animalID = new JLabel("Animal ID :");
+        animalID.setHorizontalAlignment(SwingConstants.RIGHT);
         cellnum = new JLabel("Numéro de cellule :");
+        cellnum.setHorizontalAlignment(SwingConstants.RIGHT);
         raceID = new JLabel("Race :");
+        raceID.setHorizontalAlignment(SwingConstants.RIGHT);
         arrivedDate = new JLabel("Date d'arrivée :");
+        arrivedDate.setHorizontalAlignment(SwingConstants.RIGHT);
         birthDate = new JLabel("Date de naissance :");
+        birthDate.setHorizontalAlignment(SwingConstants.RIGHT);
         chipPlacementDate = new JLabel("Date de placement de la puce :");
+        chipPlacementDate.setHorizontalAlignment(SwingConstants.RIGHT);
         tatooPlacementDate = new JLabel("Date de placement de la puce :");
+        tatooPlacementDate.setHorizontalAlignment(SwingConstants.RIGHT);
         euthanasiaDate = new JLabel("Date d'euthanasie :");
+        euthanasiaDate.setHorizontalAlignment(SwingConstants.RIGHT);
         chipNum = new JLabel("Numéro de puce :");
+        chipNum.setHorizontalAlignment(SwingConstants.RIGHT);
         chipLocalisation = new JLabel("Position de la puce :");
+        chipLocalisation.setHorizontalAlignment(SwingConstants.RIGHT);
         tatooNum = new JLabel("Numéro de tatouage :");
+        tatooNum.setHorizontalAlignment(SwingConstants.RIGHT);
         euthanasiaReason = new JLabel("Raison de l'euthanasie :");
+        euthanasiaReason.setHorizontalAlignment(SwingConstants.RIGHT);
         name = new JLabel("Nom :");
+        name.setHorizontalAlignment(SwingConstants.RIGHT);
         receptionID = new JLabel("Matricule réceptionniste :");
+        receptionID.setHorizontalAlignment(SwingConstants.RIGHT);
         veterinaryID = new JLabel("Matricule vétérinaire :");
+        veterinaryID.setHorizontalAlignment(SwingConstants.RIGHT);
         weight = new JLabel("Poids :");
+        weight.setHorizontalAlignment(SwingConstants.RIGHT);
 
         // Radio button
         male = new JRadioButton("Mâle", true);
+        male.setHorizontalAlignment(SwingConstants.RIGHT);
         female = new JRadioButton("Femelle", false);
 
         hair = new JRadioButton("Pelage", true);
+        hair.setHorizontalAlignment(SwingConstants.RIGHT);
         skin = new JRadioButton("Peau", false);
 
         // CheckBox
         toIsolateCB = new JCheckBox("A isoler");
+        toIsolateCB.setHorizontalAlignment(SwingConstants.RIGHT);
 
         sterilisedCB = new JCheckBox("Stérilisé");
 
