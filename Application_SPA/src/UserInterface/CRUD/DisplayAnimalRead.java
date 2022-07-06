@@ -8,26 +8,23 @@ import UserInterface.Template.EntryExitButtons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DisplayAnimalRead extends DisplayAnimalPanel {
-    private EntryExitButtons buttons;
+    private JButton exit;
+    private ButtonListenner listenner;
 
     public DisplayAnimalRead(MainWindow mainW, Integer animalID, boolean modif) {
         super(mainW, animalID, modif);
 
-        buttons = new EntryExitButtons() {
-            @Override
-            public void buttonValide() {
-                System.out.println("Validé");
-            }
+        listenner = new ButtonListenner();
 
-            @Override
-            public void out() {
-                mainW.changeCenterPanel(new AnimalIDRead(mainW));
-            }
-        };
+        exit = new JButton("Retour");
+        //exit.setLayout(new FlowLayout());
+        exit.addActionListener(listenner);
 
-        this.add(buttons, BorderLayout.SOUTH);
+        this.add(exit, BorderLayout.SOUTH);
 
     }
 
@@ -37,6 +34,14 @@ public class DisplayAnimalRead extends DisplayAnimalPanel {
             formulaire.setRaceIDField(new Utils().getAnimal(animalID).getRaceID());
         } catch (ConnectionException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private class ButtonListenner implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == exit)
+                mainW.changeCenterPanel();
         }
     }
 }

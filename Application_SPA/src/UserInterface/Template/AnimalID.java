@@ -32,7 +32,6 @@ public abstract class AnimalID extends JPanel {
             labelsPanels.setLayout(new FlowLayout());
             labelsPanels.add(IDAnimal);
             labelsPanels.add(animals);
-            //labelsPanels.add(buttons);
 
             this.add(labelsPanels);
         } catch (ConnectionException e) {
