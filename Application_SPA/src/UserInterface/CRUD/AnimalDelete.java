@@ -34,6 +34,6 @@ public class AnimalDelete extends AnimalID {
             }
         };
 
-        this.add(buttons, BorderLayout.SOUTH);
+        this.add(buttons);
     }
 }

@@ -19,18 +19,20 @@ public abstract class AnimalID extends JPanel {
 
     public AnimalID(MainWindow mainW) {
         this.mainW = mainW;
-        this.setLayout(new GridLayout(10,1));
+        this.setLayout(new GridLayout(15,1));
 
         IDAnimal = new JLabel("ID de l'animal : ");
+        IDAnimal.setHorizontalAlignment(SwingConstants.RIGHT);
         try {
             animalsID = new Utils().getAllID();
             animals = new JComboBox<>();
             for(Integer id : animalsID)
                 animals.addItem(id +" - "+ new Utils().getAnimal(id).getName());
             labelsPanels = new JPanel();
-            labelsPanels.setLayout(new GridLayout(1,2));
+            labelsPanels.setLayout(new FlowLayout());
             labelsPanels.add(IDAnimal);
             labelsPanels.add(animals);
+            //labelsPanels.add(buttons);
 
             this.add(labelsPanels);
         } catch (ConnectionException e) {
