@@ -26,4 +26,12 @@ public class ConnexionLabels extends JPanel{
         this.add(passwordL);
         this.add(password);
     }
+
+    public JTextField getEmployeeID() {
+        return employeeID;
+    }
+
+    public JPasswordField getPassword() {
+        return password;
+    }
 }

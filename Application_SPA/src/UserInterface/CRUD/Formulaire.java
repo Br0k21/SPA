@@ -167,6 +167,13 @@ public class Formulaire extends JPanel {
         return animalIDField;
     }
 
+    public void changeMandatoryFieldColor(){
+        cellnumField.setBackground(new Color(255, 0, 0));
+        receptionIDField.setBackground(new Color(255, 0, 0));
+        veterinaryIDField.setBackground(new Color(255, 0, 0));
+        // nameField.setBackground(new Color(255, 0, 0));
+    }
+
     public void setAllEnable(boolean b) {
         nameField.setEnabled(b);
 
@@ -222,7 +229,6 @@ public class Formulaire extends JPanel {
         else {
             animal.setAnimalID(parseInt(animalIDField.getText()));
             animal.setRaceID(raceIDField.getSelectedIndex() + 1);
-            System.out.println(raceIDField.getSelectedIndex() + 1);
             animal.setCellnum(parseInt(cellnumField.getText()));
             animal.setArrivedDate(Date.valueOf(arrivedDateField.getText()));
             animal.setReceptionID(receptionIDField.getText());
@@ -270,6 +276,7 @@ public class Formulaire extends JPanel {
 
         return false;
     }
+
     public void setAnimalIDField(Integer animalID) {
         this.animalIDField.setText(animalID.toString());
     }

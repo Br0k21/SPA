@@ -36,6 +36,7 @@ public class CreatePanel extends JPanel {
                     mainW.changeCenterPanel();
                 } catch (IncompletFieldException | ConnectionException | AjoutException iE) {
                     JOptionPane.showMessageDialog(null, iE.getMessage(), "Champ incomplet", JOptionPane.ERROR_MESSAGE);
+                    panels.changeMandatoryFieldColor();
                 }
 
             }

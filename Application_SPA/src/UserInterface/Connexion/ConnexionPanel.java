@@ -1,7 +1,9 @@
 package UserInterface.Connexion;
 
+import Model.Exceptions.ConnectionException;
 import UserInterface.MainWindow;
 import UserInterface.Template.EntryExitButtons;
+import Controller.Utils;
 import com.sun.tools.javac.Main;
 
 import javax.swing.*;
@@ -11,6 +13,7 @@ public class ConnexionPanel extends JPanel {
     private ConnexionLabels connexionL;
     private EntryExitButtons connexionB;
     private ConnexionWindow coW;
+    private Utils utils = new Utils();
 
     public ConnexionPanel(ConnexionWindow coW) {
         this.setLayout(new FlowLayout());
@@ -22,13 +25,20 @@ public class ConnexionPanel extends JPanel {
         connexionB = new EntryExitButtons() {
             @Override
             public void buttonValide() {
-                /*boolean connexionAccepted;
-                String name;
+                boolean connexionAccepted;
+                String matricule;
+                int password;
 
-
-                if(connexionAccepted)
-                    connexion();*/
-                connexion();
+                matricule = connexionL.getEmployeeID().getText();
+                password = new String(connexionL.getPassword().getPassword()).hashCode();
+                try {
+                    if (utils.verifyIDandPass(matricule, password))
+                        connexion();
+                    else
+                        JOptionPane.showMessageDialog(null, "Matricule ou mot de passe inccorect", "Connexion refusé", JOptionPane.ERROR_MESSAGE);
+                } catch (ConnectionException coE) {
+                    JOptionPane.showMessageDialog(null, "Erreur");
+                }
             }
 
             @Override

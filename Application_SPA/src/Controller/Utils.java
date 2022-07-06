@@ -66,4 +66,8 @@ public class Utils {
         deleteAnimal(animal.getAnimalID());
         addAnimal(animal);
     }
+
+    public boolean verifyIDandPass(String id, int pass) throws ConnectionException {
+        return new LoginManager().verifyIDandPass(id, pass);
+    }
 }
