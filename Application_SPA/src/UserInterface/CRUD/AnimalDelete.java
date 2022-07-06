@@ -20,9 +20,9 @@ public class AnimalDelete extends AnimalID {
             @Override
             public void buttonValide() {
                 try {
-                    // //!\\ numéro ID != index+1
                     new Utils().deleteAnimal(getAnimalID());
                     JOptionPane.showMessageDialog(null, "Suppression effectuée", "Confirmer", JOptionPane.INFORMATION_MESSAGE);
+                    mainW.changeCenterPanel();
                 } catch (DeleteException | ConnectionException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(),"Erreur", JOptionPane.ERROR_MESSAGE);
                 }
