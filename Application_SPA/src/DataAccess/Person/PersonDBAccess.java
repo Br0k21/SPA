@@ -47,7 +47,7 @@ public class PersonDBAccess implements IPersonAccess{
         return persons;
     }
 
-    private Person implementPerson(ResultSet data) {
+    public Person implementPerson(ResultSet data) {
         Person pers = new Person();
         try {pers.setNationalRegisterNum(data.getString("national_register_num"));
             pers.setPhoneNum(data.getString("phone_num"));
@@ -64,4 +64,42 @@ public class PersonDBAccess implements IPersonAccess{
 
         return pers;
     }
+
+    public String getNom(String id) throws SQLException{
+        String nom = "";
+        try{
+            Connection connexion = SingletonConnexion.getInstance();
+
+            PreparedStatement statement = connexion.prepareStatement("select * from spa.employee");
+            ResultSet data = statement.executeQuery();
+
+            boolean continu = true;
+            String registerNum = "";
+
+            while(data.next() && continu) {
+                if(data.getString("employee_id").equals(id)) {
+                    registerNum = data.getString("pers_national_register_num");
+                    continu = false;
+                }
+            }
+
+            statement = connexion.prepareStatement("select * from spa.person");
+            data = statement.executeQuery();
+
+            continu = true;
+            while(data.next() && continu) {
+                if(data.getString("national_register_num").equals(registerNum)) {
+                    nom = data.getString("first_name");
+                    continu = false;
+                }
+            }
+
+        } catch (ConnectionException coE) {
+            System.out.println("Connexion au serveur echoué");
+        }
+
+        return nom;
+    }
+
+
 }

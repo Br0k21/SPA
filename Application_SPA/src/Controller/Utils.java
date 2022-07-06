@@ -7,6 +7,7 @@ import Model.Exceptions.AjoutException;
 import Model.Exceptions.ConnectionException;
 import Model.Exceptions.DeleteException;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class Utils {
@@ -69,5 +70,9 @@ public class Utils {
 
     public boolean verifyIDandPass(String id, int pass) throws ConnectionException {
         return new LoginManager().verifyIDandPass(id, pass);
+    }
+
+    public String getNom(String id) throws SQLException{
+        return new PersonManager().getNom(id);
     }
 }

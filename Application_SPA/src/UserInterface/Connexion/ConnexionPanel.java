@@ -14,6 +14,7 @@ public class ConnexionPanel extends JPanel {
     private EntryExitButtons connexionB;
     private ConnexionWindow coW;
     private Utils utils = new Utils();
+    private String matricule;
 
     public ConnexionPanel(ConnexionWindow coW) {
         this.setLayout(new FlowLayout());
@@ -26,7 +27,6 @@ public class ConnexionPanel extends JPanel {
             @Override
             public void buttonValide() {
                 boolean connexionAccepted;
-                String matricule;
                 int password;
 
                 matricule = connexionL.getEmployeeID().getText();
@@ -55,7 +55,7 @@ public class ConnexionPanel extends JPanel {
     }
 
     private void connexion() {
-        MainWindow w = new MainWindow();
+        MainWindow w = new MainWindow(matricule);
         coW.dispose();
     }
 }

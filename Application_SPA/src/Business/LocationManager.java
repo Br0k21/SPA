@@ -5,7 +5,9 @@ import Model.Exceptions.ConnectionException;
 import Model.Location;
 
 public class LocationManager {
+    private LocationDBAccess lo = new LocationDBAccess();
+
     public Location getCountry(String postalCode, String city) throws ConnectionException {
-        return new LocationDBAccess().getLocation(postalCode, city);
+        return lo.getLocation(postalCode, city);
     }
 }

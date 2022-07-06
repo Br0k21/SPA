@@ -9,12 +9,14 @@ import Model.Exceptions.DeleteException;
 import java.util.ArrayList;
 
 public class AnimalManager {
+    private AnimalDBAccess an = new AnimalDBAccess();
+
     public Animal getAnimal(Integer animalID) throws ConnectionException {
-        return new AnimalDBAccess().getAnimal(animalID);
+        return an.getAnimal(animalID);
     }
-    public Integer getFreeID() throws ConnectionException { return new AnimalDBAccess().getFreeID();}
-    public ArrayList<Integer> getAllID() throws ConnectionException { return new AnimalDBAccess().getAllID();}
-    public void addNewAnimal(Animal animal) throws ConnectionException, AjoutException {new AnimalDBAccess().addNewAnimal(animal);}
-    public void deleteAnimal(Integer animalID) throws DeleteException, ConnectionException {new AnimalDBAccess().deleteAnimal(animalID);}
+    public Integer getFreeID() throws ConnectionException { return an.getFreeID();}
+    public ArrayList<Integer> getAllID() throws ConnectionException { return an.getAllID();}
+    public void addNewAnimal(Animal animal) throws ConnectionException, AjoutException {an.addNewAnimal(animal);}
+    public void deleteAnimal(Integer animalID) throws DeleteException, ConnectionException {an.deleteAnimal(animalID);}
 
 }

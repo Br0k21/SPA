@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class MainWindow extends Wnds {
     private JPanel currentPanel; // peut etre retirer
+    private String idConnexion;
 
     private ThreadHeure heure;
 
@@ -28,8 +29,10 @@ public class MainWindow extends Wnds {
 
     private MenuListener menuListener;
 
-    public MainWindow() {
+    public MainWindow(String idConnexion) {
         super("S.P.A.");
+
+        this.idConnexion = idConnexion;
 
         setJMenuBar();
         setListener();
@@ -177,5 +180,9 @@ public class MainWindow extends Wnds {
         panels.put("treatmentForm", new TreatmentPanel(window));
 
         return panels;
+    }
+
+    public String getIdConnexion() {
+        return idConnexion;
     }
 }
