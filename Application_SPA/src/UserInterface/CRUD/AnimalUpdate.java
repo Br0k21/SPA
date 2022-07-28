@@ -3,7 +3,6 @@ package UserInterface.CRUD;
 import Controller.Utils;
 import UserInterface.MainWindow;
 import UserInterface.Template.AnimalID;
-import UserInterface.Template.DisplayAnimalPanel;
 import UserInterface.Template.EntryExitButtons;
 
 public class AnimalUpdate extends AnimalID {
@@ -13,7 +12,6 @@ public class AnimalUpdate extends AnimalID {
         buttons = new EntryExitButtons() {
             @Override
             public void buttonValide() {
-                System.out.println(animals.getSelectedIndex() + 1);
                 mainW.changeCenterPanel(new DisplayAnimalUpdate(mainW, getAnimalID(), true));
             }
 

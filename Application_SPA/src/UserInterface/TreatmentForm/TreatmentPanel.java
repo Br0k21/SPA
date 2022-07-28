@@ -20,6 +20,8 @@ public class TreatmentPanel extends JPanel {
             @Override
             public void buttonValide() {
                 System.out.println("Treatment valider");
+                System.out.println("Date de début : " + treatmentL.getStartD());
+                System.out.println("Date de fin : " + treatmentL.getEndD().getValue());
             }
 
             @Override
